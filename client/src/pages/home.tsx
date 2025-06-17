@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import VisaCheckerForm from "@/components/visa-checker-form";
@@ -17,6 +17,7 @@ import { useToast } from "@/hooks/use-toast";
 import type { Country, Service } from "@shared/schema";
 
 export default function Home() {
+  const [, setLocation] = useLocation();
   const [consultationForm, setConsultationForm] = useState({
     firstName: "",
     lastName: "",
@@ -59,15 +60,8 @@ export default function Home() {
 
     setIsChecking(true);
     try {
-      const response = await apiRequest("POST", "/api/visa-check", {
-        fromCountry: heroForm.fromCountry,
-        toCountry: heroForm.toCountry,
-        purpose: heroForm.purpose,
-      });
-      const data = await response.json();
-      
-      // Redirect to visa checker page with results
-      window.location.href = `/visa-checker?from=${heroForm.fromCountry}&to=${heroForm.toCountry}&purpose=${heroForm.purpose}`;
+      // Redirect to visa checker page with parameters
+      setLocation(`/visa-checker?from=${heroForm.fromCountry}&to=${heroForm.toCountry}&purpose=${heroForm.purpose}`);
     } catch (error) {
       toast({
         title: "Hata",

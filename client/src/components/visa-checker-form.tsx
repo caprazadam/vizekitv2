@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -34,6 +34,43 @@ export default function VisaCheckerForm() {
   const { data: countries = [] } = useQuery<Country[]>({
     queryKey: ["/api/countries"],
   });
+
+  // Auto-fill form from URL parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromParam = urlParams.get('from');
+    const toParam = urlParams.get('to');
+    const purposeParam = urlParams.get('purpose');
+
+    if (fromParam) setFromCountry(fromParam);
+    if (toParam) setToCountry(toParam);
+    if (purposeParam) setPurpose(purposeParam);
+
+    // Auto-submit if all parameters are present
+    if (fromParam && toParam && purposeParam) {
+      const autoSubmit = async () => {
+        setIsChecking(true);
+        try {
+          const response = await apiRequest("POST", "/api/visa-check", {
+            fromCountry: fromParam,
+            toCountry: toParam,
+            purpose: purposeParam,
+          });
+          const data = await response.json();
+          setResult(data);
+        } catch (error) {
+          toast({
+            title: "Hata",
+            description: "Vize gereksinimleri kontrol edilemedi. Lütfen tekrar deneyin.",
+            variant: "destructive",
+          });
+        } finally {
+          setIsChecking(false);
+        }
+      };
+      autoSubmit();
+    }
+  }, [toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
