@@ -251,9 +251,11 @@ export default function VisaCheckerForm() {
               </ul>
             </div>
 
-            <Button className="w-full bg-visa-blue hover:bg-blue-700">
-              Başvuru Sürecini Başlat
-            </Button>
+            {result.visaRequired && (
+              <Button className="w-full bg-visa-blue hover:bg-blue-700">
+                Başvuru Sürecini Başlat
+              </Button>
+            )}
           </CardContent>
         </Card>
       )}
