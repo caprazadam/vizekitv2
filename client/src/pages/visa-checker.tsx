@@ -15,17 +15,17 @@ export default function VisaChecker() {
           <Link href="/">
             <Button variant="ghost">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
+              Ana Sayfaya Dön
             </Button>
           </Link>
         </div>
 
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Visa Requirement Checker
+            Vize Gereksinim Kontrolü
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Check visa requirements, processing times, and fees for any destination country
+            Herhangi bir hedef ülke için vize gereksinimlerini, işlem sürelerini ve ücretleri kontrol edin
           </p>
         </div>
 
