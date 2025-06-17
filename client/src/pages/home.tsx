@@ -25,7 +25,13 @@ export default function Home() {
     destinationCountry: "",
     message: "",
   });
+  const [heroForm, setHeroForm] = useState({
+    fromCountry: "",
+    toCountry: "",
+    purpose: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
   const { toast } = useToast();
 
   const { data: countries = [] } = useQuery<Country[]>({
@@ -39,6 +45,40 @@ export default function Home() {
   // Show first 8 countries as popular destinations
   const popularCountries = countries.slice(0, 8);
 
+  const handleHeroFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!heroForm.fromCountry || !heroForm.toCountry || !heroForm.purpose) {
+      toast({
+        title: "Eksik Bilgi",
+        description: "Lütfen tüm alanları doldurun",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsChecking(true);
+    try {
+      const response = await apiRequest("POST", "/api/visa-check", {
+        fromCountry: heroForm.fromCountry,
+        toCountry: heroForm.toCountry,
+        purpose: heroForm.purpose,
+      });
+      const data = await response.json();
+      
+      // Redirect to visa checker page with results
+      window.location.href = `/visa-checker?from=${heroForm.fromCountry}&to=${heroForm.toCountry}&purpose=${heroForm.purpose}`;
+    } catch (error) {
+      toast({
+        title: "Hata",
+        description: "Vize gereksinimleri kontrol edilemedi. Lütfen tekrar deneyin.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsChecking(false);
+    }
+  };
+
   const handleConsultationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -46,8 +86,8 @@ export default function Home() {
     try {
       await apiRequest("POST", "/api/consultations", consultationForm);
       toast({
-        title: "Consultation Request Sent",
-        description: "We'll get back to you within 24 hours.",
+        title: "Danışmanlık Talebi Gönderildi",
+        description: "24 saat içinde size dönüş yapacağız.",
       });
       setConsultationForm({
         firstName: "",
@@ -59,8 +99,8 @@ export default function Home() {
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to send consultation request. Please try again.",
+        title: "Hata",
+        description: "Danışmanlık talebi gönderilemedi. Lütfen tekrar deneyin.",
         variant: "destructive",
       });
     } finally {
@@ -72,35 +112,105 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      {/* Hero Section with Visa Checker */}
-      <section id="visa-checker" className="gradient-hero text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                Check Visa Requirements for Any Country
-              </h2>
-              <p className="text-xl text-blue-100 mb-8">
-                Get instant visa requirements, processing times, and application guidance for over 200 countries worldwide.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="flex items-center text-blue-100">
-                  <CheckCircle className="h-5 w-5 mr-2" />
-                  <span>Instant Results</span>
-                </div>
-                <div className="flex items-center text-blue-100">
-                  <CheckCircle className="h-5 w-5 mr-2" />
-                  <span>200+ Countries</span>
-                </div>
-                <div className="flex items-center text-blue-100">
-                  <CheckCircle className="h-5 w-5 mr-2" />
-                  <span>Expert Support</span>
-                </div>
+      {/* Hero Section with Search Form */}
+      <section className="gradient-hero text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+            Vize Gereksinimlerini Kontrol Edin
+          </h1>
+          <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto">
+            200+ ülke için anında vize gereksinimleri, işlem süreleri ve başvuru rehberliği alın
+          </p>
+          
+          {/* Horizontal Search Form */}
+          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto">
+            <form onSubmit={handleHeroFormSubmit} className="grid md:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700 text-left">
+                  Vatandaşlığınız
+                </label>
+                <Select value={heroForm.fromCountry} onValueChange={(value) => setHeroForm(prev => ({ ...prev, fromCountry: value }))}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Ülke seçin..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countries.map((country) => (
+                      <SelectItem key={country.code} value={country.code}>
+                        {country.flag} {country.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700 text-left">
+                  Gideceğiniz Ülke
+                </label>
+                <Select value={heroForm.toCountry} onValueChange={(value) => setHeroForm(prev => ({ ...prev, toCountry: value }))}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Hedef ülke..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countries.map((country) => (
+                      <SelectItem key={country.code} value={country.code}>
+                        {country.flag} {country.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700 text-left">
+                  Seyahat Amacı
+                </label>
+                <Select value={heroForm.purpose} onValueChange={(value) => setHeroForm(prev => ({ ...prev, purpose: value }))}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Amaç seçin..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="tourism">Turizm</SelectItem>
+                    <SelectItem value="business">İş</SelectItem>
+                    <SelectItem value="transit">Transit</SelectItem>
+                    <SelectItem value="work">Çalışma</SelectItem>
+                    <SelectItem value="study">Eğitim</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700 text-left opacity-0">
+                  Ara
+                </label>
+                <Button 
+                  type="submit" 
+                  disabled={isChecking}
+                  className="w-full h-12 bg-visa-blue hover:bg-blue-700 text-lg font-semibold"
+                >
+                  {isChecking ? "Kontrol Ediliyor..." : "Vize Gereksinimlerini Kontrol Et"}
+                </Button>
+              </div>
+            </form>
+          </div>
+
+          {/* Features */}
+          <div className="flex flex-wrap justify-center gap-8 mt-12">
+            <div className="flex items-center text-blue-100">
+              <CheckCircle className="h-5 w-5 mr-2" />
+              <span>Anında Sonuç</span>
             </div>
-            
-            <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900">
-              <VisaCheckerForm />
+            <div className="flex items-center text-blue-100">
+              <CheckCircle className="h-5 w-5 mr-2" />
+              <span>200+ Ülke</span>
+            </div>
+            <div className="flex items-center text-blue-100">
+              <CheckCircle className="h-5 w-5 mr-2" />
+              <span>Uzman Desteği</span>
+            </div>
+            <div className="flex items-center text-blue-100">
+              <CheckCircle className="h-5 w-5 mr-2" />
+              <span>7/24 Hizmet</span>
             </div>
           </div>
         </div>
