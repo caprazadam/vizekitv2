@@ -172,8 +172,8 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
       
       toast({
         title: "Ödeme Başarılı",
-        description: `Başvuru numaranız: ${applicationNumber}. Bu numarayı saklayın ve başvuru durumunuzu takip edin.`,
-        duration: 8000,
+        description: `Başvuru numaranız: ${applicationNumber}. Başvuru özeti e-posta adresinize gönderilecektir. Bu numarayı saklayın ve başvuru durumunuzu takip edin.`,
+        duration: 10000,
       });
       onClose();
     } catch (error) {
@@ -442,6 +442,19 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                     Kredi kartı bilgileriniz PayTR güvenli ödeme altyapısında işlenir
                   </p>
                 </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-200/50 shadow-sm">
+                <h5 className="font-semibold text-orange-900 mb-3 text-lg flex items-center">
+                  <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
+                  Ödeme Sonrası Süreç
+                </h5>
+                <ul className="text-sm text-orange-700 space-y-2">
+                  <li>• Başarılı ödeme sonrası başvuru numaranız oluşturulacak</li>
+                  <li>• Başvuru özeti ve detayları e-posta adresinize gönderilecek</li>
+                  <li>• E-postada başvuru numaranız ve takip bilgileri yer alacak</li>
+                  <li>• Başvuru durumunuzu "Başvuru Sorgula" sayfasından takip edebilirsiniz</li>
+                </ul>
               </div>
 
 
