@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, Phone, Mail, Clock } from "lucide-react";
+import { CheckCircle, Phone, Mail, Clock, Brain, Zap, Sparkles, Globe, Plane } from "lucide-react";
 import { useState } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -103,28 +103,69 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen neural-network">
       <Navbar />
 
-      {/* Hero Section with Search Form */}
-      <section className="gradient-hero text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Vize Gereksinimlerini Kontrol Edin
+      {/* Modern AI Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/30"></div>
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="flex justify-center mb-6">
+            <div className="ai-glow p-4 rounded-full bg-white/10">
+              <Brain className="h-16 w-16 text-blue-300" />
+            </div>
+          </div>
+          
+          <h1 className="text-4xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="gradient-text block mb-2">AI Destekli</span>
+            <span className="shimmer-text">Vize Danışmanlığı</span>
           </h1>
-          <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto">
-            200+ ülke için anında vize gereksinimleri, işlem süreleri ve başvuru rehberliği alın
+          
+          <p className="text-xl lg:text-2xl text-blue-100 mb-8 max-w-4xl mx-auto">
+            Yapay zeka ile desteklenen akıllı sistemimiz, Türk pasaportu sahipleri için 
+            en güncel vize bilgilerini anında analiz eder ve kişiselleştirilmiş çözümler sunar.
           </p>
           
-          {/* Horizontal Search Form */}
-          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto">
+          <div className="flex justify-center gap-6 mb-12">
+            <div className="flex items-center gap-2 text-green-300">
+              <Zap className="h-5 w-5" />
+              <span>Anında Analiz</span>
+            </div>
+            <div className="flex items-center gap-2 text-yellow-300">
+              <Brain className="h-5 w-5" />
+              <span>AI Powered</span>
+            </div>
+            <div className="flex items-center gap-2 text-pink-300">
+              <Sparkles className="h-5 w-5" />
+              <span>Akıllı Öneriler</span>
+            </div>
+          </div>
+          
+          {/* Modern AI-styled Search Form */}
+          <div className="ai-card tech-border rounded-xl p-8 text-gray-900 max-w-5xl mx-auto">
+            <div className="flex justify-center mb-4">
+              <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600">
+                <Globe className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">AI Vize Analizi</h3>
+            <p className="text-gray-600 mb-6 text-center">Yapay zeka destekli sistemimiz ile vize durumunuzu anında öğrenin</p>
+            
             <form onSubmit={handleHeroFormSubmit} className="grid md:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
-                  Vatandaşlığınız
+                  🏠 Vatandaşlığınız
                 </label>
                 <Select value={heroForm.fromCountry} onValueChange={(value) => setHeroForm(prev => ({ ...prev, fromCountry: value }))}>
-                  <SelectTrigger className="h-12">
+                  <SelectTrigger className="h-12 tech-border">
                     <SelectValue placeholder="Ülke seçin..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -139,10 +180,10 @@ export default function Home() {
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
-                  Gideceğiniz Ülke
+                  🌍 Gideceğiniz Ülke
                 </label>
                 <Select value={heroForm.toCountry} onValueChange={(value) => setHeroForm(prev => ({ ...prev, toCountry: value }))}>
-                  <SelectTrigger className="h-12">
+                  <SelectTrigger className="h-12 tech-border">
                     <SelectValue placeholder="Hedef ülke..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -157,14 +198,14 @@ export default function Home() {
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
-                  Seyahat Amacı
+                  🎯 Seyahat Amacı
                 </label>
                 <Select value={heroForm.purpose} onValueChange={(value) => setHeroForm(prev => ({ ...prev, purpose: value }))}>
-                  <SelectTrigger className="h-12">
+                  <SelectTrigger className="h-12 tech-border">
                     <SelectValue placeholder="Amaç seçin..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="tourist">Turistik Vize</SelectItem>
+                    <SelectItem value="tourist">🏖️ Turistik Vize</SelectItem>
                     <SelectItem value="business">Ticari Vize / İş Vizesi</SelectItem>
                     <SelectItem value="student">Öğrenci / Eğitim Vizesi</SelectItem>
                     <SelectItem value="family">Aile Birleşimi Vizesi</SelectItem>
@@ -185,9 +226,10 @@ export default function Home() {
                 <Button 
                   type="submit" 
                   disabled={isChecking}
-                  className="w-full h-12 bg-visa-blue hover:bg-blue-700 text-lg font-semibold"
+                  className="w-full h-12 ai-button text-white text-lg font-semibold"
                 >
-                  {isChecking ? "Kontrol Ediliyor..." : "Vizeyi Kontrol Et"}
+                  <Brain className="mr-2 h-5 w-5" />
+                  {isChecking ? "AI Analiz Ediyor..." : "AI ile Analiz Et"}
                 </Button>
               </div>
             </form>
