@@ -280,7 +280,7 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Gereksinimleri Kontrol Et",
+                title: "Vizeyi Kontrol Et",
                 description: "Hedef ülkeniz için gereksinimleri belirlemek üzere vize kontrol aracımızı kullanın."
               },
               {

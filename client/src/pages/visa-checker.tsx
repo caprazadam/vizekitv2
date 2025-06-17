@@ -22,7 +22,7 @@ export default function VisaChecker() {
 
         <div className="text-center mb-12">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Vize Gereksinim Kontrolü
+            Vizeyi Kontrol Et
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Herhangi bir hedef ülke için vize gereksinimlerini, işlem sürelerini ve ücretleri kontrol edin

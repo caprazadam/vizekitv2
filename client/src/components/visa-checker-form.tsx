@@ -71,7 +71,7 @@ export default function VisaCheckerForm() {
     <div className="grid lg:grid-cols-2 gap-8">
       <Card className="shadow-2xl">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Vize Gereksinim Kontrolü</CardTitle>
+          <CardTitle className="text-2xl text-center">Vizeyi Kontrol Et</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -135,7 +135,7 @@ export default function VisaCheckerForm() {
               disabled={isChecking}
             >
               {isChecking && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Vize Gereksinimlerini Kontrol Et
+              Vizeyi Kontrol Et
             </Button>
           </form>
         </CardContent>
