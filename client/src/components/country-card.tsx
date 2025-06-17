@@ -11,7 +11,7 @@ interface CountryCardProps {
 export default function CountryCard({ country }: CountryCardProps) {
   return (
     <Link href={`/country/${country.code}`}>
-      <Card className="cursor-pointer ai-card hover:shadow-lg transition-all duration-300 hover:-translate-y-2 group">
+      <Card className="cursor-pointer hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
         <img 
           src={country.image} 
           alt={`${country.name} landmarks`}
