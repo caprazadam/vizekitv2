@@ -70,7 +70,7 @@ export default function VisaCheckerForm() {
     <div className="grid lg:grid-cols-2 gap-8">
       <Card className="shadow-2xl">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Visa Requirement Checker</CardTitle>
+          <CardTitle className="text-2xl text-center">Vize Gereksinim Kontrolü</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
