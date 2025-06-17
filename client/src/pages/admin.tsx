@@ -125,6 +125,8 @@ export default function Admin() {
     switch (status) {
       case "Ödeme Alındı":
         return <CreditCard className="h-4 w-4 text-blue-600" />;
+      case "Transfer Bekleniyor":
+        return <DollarSign className="h-4 w-4 text-purple-600" />;
       case "İnceleniyor":
         return <Clock className="h-4 w-4 text-orange-600" />;
       case "Onaylandı":
@@ -140,6 +142,8 @@ export default function Admin() {
     switch (status) {
       case "Ödeme Alındı":
         return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Transfer Bekleniyor":
+        return "bg-purple-100 text-purple-800 border-purple-200";
       case "İnceleniyor":
         return "bg-orange-100 text-orange-800 border-orange-200";
       case "Onaylandı":
@@ -259,6 +263,7 @@ export default function Admin() {
                   <SelectContent>
                     <SelectItem value="all">Tümü</SelectItem>
                     <SelectItem value="Ödeme Alındı">Ödeme Alındı</SelectItem>
+                    <SelectItem value="Transfer Bekleniyor">Transfer Bekleniyor</SelectItem>
                     <SelectItem value="İnceleniyor">İnceleniyor</SelectItem>
                     <SelectItem value="Onaylandı">Onaylandı</SelectItem>
                     <SelectItem value="Reddedildi">Reddedildi</SelectItem>
@@ -371,6 +376,17 @@ export default function Admin() {
                         <span className="text-gray-600">Ücret:</span>
                         <span className="font-bold text-green-700">{formatFee(selectedApplication.fee)}</span>
                       </div>
+                      {selectedApplication.paymentMethod && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Ödeme Yöntemi:</span>
+                          <span className="font-semibold">
+                            {selectedApplication.paymentMethod === 'paytr' ? 'PayTR (Kredi Kartı)' :
+                             selectedApplication.paymentMethod === 'bank' ? 'Banka Transferi' :
+                             selectedApplication.paymentMethod === 'paypal' ? 'PayPal' :
+                             'Belirtilmemiş'}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -453,6 +469,7 @@ export default function Admin() {
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="Ödeme Alındı">Ödeme Alındı</SelectItem>
+                              <SelectItem value="Transfer Bekleniyor">Transfer Bekleniyor</SelectItem>
                               <SelectItem value="İnceleniyor">İnceleniyor</SelectItem>
                               <SelectItem value="Onaylandı">Onaylandı</SelectItem>
                               <SelectItem value="Reddedildi">Reddedildi</SelectItem>
