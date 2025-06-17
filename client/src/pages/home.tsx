@@ -315,44 +315,44 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Common Document Requirements
+              Genel Belge Gereksinimleri
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Essential documents needed for most visa applications
+              Çoğu vize başvurusu için gerekli temel belgeler
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Passport & Identity",
+                title: "Pasaport ve Kimlik",
                 image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300",
-                items: ["Valid passport (6+ months)", "Passport photographs", "National ID copy"]
+                items: ["Geçerli pasaport (6+ ay)", "Pasaport fotoğrafları", "Kimlik belgesi fotokopisi"]
               },
               {
-                title: "Financial Proof",
+                title: "Mali Durum Belgeleri",
                 image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300",
-                items: ["Bank statements (3-6 months)", "Income tax returns", "Employment certificate"]
+                items: ["Banka hesap özetleri (3-6 ay)", "Gelir vergisi beyannameleri", "İş belgesi"]
               },
               {
-                title: "Travel Plans",
+                title: "Seyahat Planları",
                 image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300",
-                items: ["Flight itinerary", "Hotel reservations", "Travel insurance"]
+                items: ["Uçak rezervasyonu", "Otel rezervasyonları", "Seyahat sigortası"]
               },
               {
-                title: "Business Travel",
+                title: "İş Seyahati",
                 image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300",
-                items: ["Invitation letter", "Company registration", "Meeting agenda"]
+                items: ["Davet mektubu", "Şirket kayıt belgesi", "Toplantı gündemi"]
               },
               {
-                title: "Health Requirements",
+                title: "Sağlık Gereksinimleri",
                 image: "https://pixabay.com/get/g0275fefd29d11cc446f2caebcecf19a5b452be4de581425f204433da8ad296aa22e6e23c73a20736e083a07ea09ec27c2b356f485de31f4b95c5dc5523c03de1_1280.jpg",
-                items: ["Vaccination certificates", "Medical examination", "Health insurance"]
+                items: ["Aşı sertifikaları", "Tıbbi muayene", "Sağlık sigortası"]
               },
               {
-                title: "Student Visas",
+                title: "Öğrenci Vizeleri",
                 image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=300",
-                items: ["Admission letter", "Academic transcripts", "Financial sponsorship"]
+                items: ["Kabul mektubu", "Akademik transkriptler", "Mali destek belgesi"]
               }
             ].map((doc, index) => (
               <Card key={index} className="overflow-hidden">
@@ -384,10 +384,10 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                Get Expert Visa Assistance
+                Uzman Vize Yardımı Alın
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                Have questions about visa requirements? Our expert consultants are here to help you navigate the application process.
+                Vize gereksinimleri hakkında sorularınız mı var? Uzman danışmanlarımız başvuru sürecinde size rehberlik etmek için burada.
               </p>
               
               <div className="space-y-6 mb-8">
@@ -396,8 +396,8 @@ export default function Home() {
                     <Phone className="h-5 w-5 text-visa-blue" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Phone Support</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <h3 className="font-semibold text-gray-900">Telefon Desteği</h3>
+                    <p className="text-gray-600">+90 (212) 123-4567</p>
                   </div>
                 </div>
                 <div className="flex items-center">
@@ -405,8 +405,8 @@ export default function Home() {
                     <Mail className="h-5 w-5 text-visa-blue" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Email Support</h3>
-                    <p className="text-gray-600">support@visaservice.com</p>
+                    <h3 className="font-semibold text-gray-900">E-posta Desteği</h3>
+                    <p className="text-gray-600">info@vizehizmet.com</p>
                   </div>
                 </div>
                 <div className="flex items-center">
@@ -414,36 +414,36 @@ export default function Home() {
                     <Clock className="h-5 w-5 text-visa-blue" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Business Hours</h3>
-                    <p className="text-gray-600">Mon-Fri: 9AM-6PM EST</p>
+                    <h3 className="font-semibold text-gray-900">Çalışma Saatleri</h3>
+                    <p className="text-gray-600">Pzt-Cum: 09:00-18:00</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <Card className="p-8 bg-gray-50">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Request Consultation</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Danışmanlık Talebi</h3>
               <form onSubmit={handleConsultationSubmit} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      First Name
+                      Adınız
                     </label>
                     <Input
                       value={consultationForm.firstName}
                       onChange={(e) => setConsultationForm(prev => ({ ...prev, firstName: e.target.value }))}
-                      placeholder="John"
+                      placeholder="Adınız"
                       required
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Last Name
+                      Soyadınız
                     </label>
                     <Input
                       value={consultationForm.lastName}
                       onChange={(e) => setConsultationForm(prev => ({ ...prev, lastName: e.target.value }))}
-                      placeholder="Doe"
+                      placeholder="Soyadınız"
                       required
                     />
                   </div>
