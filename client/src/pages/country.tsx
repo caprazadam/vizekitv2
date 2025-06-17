@@ -81,7 +81,7 @@ export default function CountryPage() {
           <Link href="/">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Countries
+              Ülkelere Dön
             </Button>
           </Link>
         </div>
@@ -94,21 +94,21 @@ export default function CountryPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-visa-blue" />
-                  Visa Requirements
+                  Vize Gereksinimleri
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {country.visaRequired ? (
-                    <Badge variant="destructive">Visa Required</Badge>
+                    <Badge variant="destructive">Vize Gerekli</Badge>
                   ) : (
-                    <Badge className="bg-green-500">Visa Free</Badge>
+                    <Badge className="bg-green-500">Vizesiz</Badge>
                   )}
                   {country.eVisaAvailable && (
-                    <Badge className="bg-blue-500">e-Visa Available</Badge>
+                    <Badge className="bg-blue-500">e-Vize Mevcut</Badge>
                   )}
                   {country.visaOnArrival && (
-                    <Badge className="bg-yellow-500">Visa on Arrival</Badge>
+                    <Badge className="bg-yellow-500">Varışta Vize</Badge>
                   )}
                 </div>
 
@@ -116,14 +116,14 @@ export default function CountryPage() {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <Clock className="h-4 w-4 text-visa-blue" />
-                      <h3 className="font-semibold">Processing Time</h3>
+                      <h3 className="font-semibold">İşlem Süresi</h3>
                     </div>
                     <p className="text-gray-600">{country.processingTime}</p>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <DollarSign className="h-4 w-4 text-visa-blue" />
-                      <h3 className="font-semibold">Visa Fee</h3>
+                      <h3 className="font-semibold">Vize Ücreti</h3>
                     </div>
                     <p className="text-green-600 font-medium">{country.fee}</p>
                   </div>

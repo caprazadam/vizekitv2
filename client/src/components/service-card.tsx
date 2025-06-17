@@ -34,7 +34,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           ))}
         </ul>
         <Button className="w-full bg-visa-blue hover:bg-blue-700">
-          Learn More
+          Daha Fazla Bilgi
         </Button>
       </CardContent>
     </Card>
