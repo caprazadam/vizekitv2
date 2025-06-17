@@ -39,8 +39,8 @@ export default function VisaCheckerForm() {
     
     if (!fromCountry || !toCountry || !purpose) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all fields",
+        title: "Eksik Bilgi",
+        description: "Lütfen tüm alanları doldurun",
         variant: "destructive",
       });
       return;
@@ -76,11 +76,11 @@ export default function VisaCheckerForm() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Nationality
+                Vatandaşlığınız
               </label>
               <Select value={fromCountry} onValueChange={setFromCountry}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select your country..." />
+                  <SelectValue placeholder="Ülkenizi seçin..." />
                 </SelectTrigger>
                 <SelectContent>
                   {countries.map((country) => (
@@ -94,11 +94,11 @@ export default function VisaCheckerForm() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Destination Country
+                Gideceğiniz Ülke
               </label>
               <Select value={toCountry} onValueChange={setToCountry}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select destination..." />
+                  <SelectValue placeholder="Hedef ülke seçin..." />
                 </SelectTrigger>
                 <SelectContent>
                   {countries.map((country) => (
@@ -112,18 +112,18 @@ export default function VisaCheckerForm() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Purpose of Travel
+                Seyahat Amacı
               </label>
               <Select value={purpose} onValueChange={setPurpose}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select purpose..." />
+                  <SelectValue placeholder="Amaç seçin..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="tourism">Tourism</SelectItem>
-                  <SelectItem value="business">Business</SelectItem>
+                  <SelectItem value="tourism">Turizm</SelectItem>
+                  <SelectItem value="business">İş</SelectItem>
                   <SelectItem value="transit">Transit</SelectItem>
-                  <SelectItem value="work">Work</SelectItem>
-                  <SelectItem value="study">Study</SelectItem>
+                  <SelectItem value="work">Çalışma</SelectItem>
+                  <SelectItem value="study">Eğitim</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -134,7 +134,7 @@ export default function VisaCheckerForm() {
               disabled={isChecking}
             >
               {isChecking && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Check Visa Requirements
+              Vize Gereksinimlerini Kontrol Et
             </Button>
           </form>
         </CardContent>
@@ -144,21 +144,21 @@ export default function VisaCheckerForm() {
         <Card className="shadow-2xl">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              {result.toCountry.flag} {result.toCountry.name} - Visa Requirements
+              {result.toCountry.flag} {result.toCountry.name} - Vize Gereksinimleri
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex flex-wrap gap-2">
               {result.visaRequired ? (
-                <Badge variant="destructive">Visa Required</Badge>
+                <Badge variant="destructive">Vize Gerekli</Badge>
               ) : (
-                <Badge className="bg-green-500">Visa Free</Badge>
+                <Badge className="bg-green-500">Vizesiz</Badge>
               )}
               {result.eVisaAvailable && (
-                <Badge className="bg-blue-500">e-Visa Available</Badge>
+                <Badge className="bg-blue-500">e-Vize Mevcut</Badge>
               )}
               {result.visaOnArrival && (
-                <Badge className="bg-yellow-500">Visa on Arrival</Badge>
+                <Badge className="bg-yellow-500">Varışta Vize</Badge>
               )}
             </div>
 
@@ -166,14 +166,14 @@ export default function VisaCheckerForm() {
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-visa-blue" />
                 <div>
-                  <div className="text-sm text-gray-600">Processing Time</div>
+                  <div className="text-sm text-gray-600">İşlem Süresi</div>
                   <div className="font-medium">{result.processingTime}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <DollarSign className="h-4 w-4 text-visa-blue" />
                 <div>
-                  <div className="text-sm text-gray-600">Fee</div>
+                  <div className="text-sm text-gray-600">Ücret</div>
                   <div className="font-medium text-green-600">{result.fee}</div>
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function VisaCheckerForm() {
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <FileText className="h-4 w-4 text-visa-blue" />
-                <h4 className="font-semibold">Required Documents</h4>
+                <h4 className="font-semibold">Gerekli Belgeler</h4>
               </div>
               <ul className="space-y-2">
                 {result.documents.map((doc, index) => (
@@ -197,7 +197,7 @@ export default function VisaCheckerForm() {
             </div>
 
             <Button className="w-full bg-visa-blue hover:bg-blue-700">
-              Start Application Process
+              Başvuru Sürecini Başlat
             </Button>
           </CardContent>
         </Card>
