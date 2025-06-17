@@ -25,7 +25,7 @@ export default function CountryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-visa-blue mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading country information...</p>
+            <p className="mt-4 text-gray-600">Ülke bilgileri yükleniyor...</p>
           </div>
         </div>
         <Footer />
@@ -39,12 +39,12 @@ export default function CountryPage() {
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Country Not Found</h1>
-            <p className="text-gray-600 mb-6">The requested country information could not be found.</p>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Ülke Bulunamadı</h1>
+            <p className="text-gray-600 mb-6">İstenen ülke bilgisi bulunamadı.</p>
             <Link href="/">
               <Button className="bg-visa-blue hover:bg-blue-700">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Home
+                Ana Sayfaya Dön
               </Button>
             </Link>
           </div>

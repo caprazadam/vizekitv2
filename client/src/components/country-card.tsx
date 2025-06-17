@@ -26,20 +26,20 @@ export default function CountryCard({ country }: CountryCardProps) {
           
           <div className="flex flex-wrap gap-2 mb-4">
             {country.visaRequired && (
-              <Badge variant="outline">Visa Required</Badge>
+              <Badge variant="outline">Vize Gerekli</Badge>
             )}
             {country.eVisaAvailable && (
-              <Badge className="bg-blue-500">e-Visa</Badge>
+              <Badge className="bg-blue-500">e-Vize</Badge>
             )}
             {country.visaOnArrival && (
-              <Badge className="bg-yellow-500">Visa on Arrival</Badge>
+              <Badge className="bg-yellow-500">Varışta Vize</Badge>
             )}
           </div>
 
           <div className="flex justify-between items-center">
             <div className="flex items-center text-sm text-visa-blue font-medium">
               <Clock className="h-4 w-4 mr-1" />
-              Processing: {country.processingTime}
+              İşlem: {country.processingTime}
             </div>
             <div className="text-sm text-green-600 font-medium">
               <DollarSign className="h-4 w-4 inline mr-1" />

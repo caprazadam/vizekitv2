@@ -94,12 +94,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         processingTime: toCountryData.processingTime,
         fee: toCountryData.fee,
         documents: [
-          "Valid passport (6+ months)",
-          "Passport photographs",
-          "Bank statements (3-6 months)",
-          "Travel itinerary",
-          "Hotel reservations",
-          "Travel insurance"
+          "Geçerli pasaport (6+ ay geçerlilik)",
+          "Pasaport fotoğrafları",
+          "Banka ekstreleri (3-6 ay)",
+          "Seyahat programı",
+          "Otel rezervasyonları",
+          "Seyahat sigortası"
         ]
       };
 
