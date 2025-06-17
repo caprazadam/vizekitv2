@@ -7,11 +7,11 @@ export default function Navbar() {
   const [location] = useLocation();
 
   const navItems = [
-    { href: "/visa-checker", label: "Visa Checker" },
-    { href: "/#countries", label: "Countries" },
-    { href: "/#services", label: "Services" },
-    { href: "/#about", label: "About" },
-    { href: "/#contact", label: "Contact" },
+    { href: "/visa-checker", label: "Vize Kontrol" },
+    { href: "/countries", label: "Ülkeler" },
+    { href: "/services", label: "Hizmetler" },
+    { href: "/about", label: "Hakkımızda" },
+    { href: "/contact", label: "İletişim" },
   ];
 
   const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
@@ -42,7 +42,7 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <Link href="/">
                 <h1 className="text-2xl font-bold text-visa-blue cursor-pointer">
-                  VisaService
+                  VizeHizmet
                 </h1>
               </Link>
             </div>

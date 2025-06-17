@@ -125,9 +125,11 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-10">
-            <Button variant="outline" className="border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white">
-              View All Countries
-            </Button>
+            <Link href="/countries">
+              <Button variant="outline" className="border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white">
+                Tüm Ülkeleri Gör
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

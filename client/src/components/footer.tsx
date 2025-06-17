@@ -32,28 +32,28 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link href="/visa-checker" className="text-gray-300 hover:text-white transition-colors">
-                  Visa Checker
+                  Vize Kontrol
                 </Link>
               </li>
               <li>
-                <a href="#countries" className="text-gray-300 hover:text-white transition-colors">
-                  Countries
-                </a>
+                <Link href="/countries" className="text-gray-300 hover:text-white transition-colors">
+                  Ülkeler
+                </Link>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white transition-colors">
-                  Services
-                </a>
+                <Link href="/services" className="text-gray-300 hover:text-white transition-colors">
+                  Hizmetler
+                </Link>
               </li>
               <li>
-                <a href="#about" className="text-gray-300 hover:text-white transition-colors">
-                  About Us
-                </a>
+                <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+                  Hakkımızda
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contact
-                </a>
+                <Link href="/contact" className="text-gray-300 hover:text-white transition-colors">
+                  İletişim
+                </Link>
               </li>
             </ul>
           </div>
