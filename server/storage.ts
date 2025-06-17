@@ -300,6 +300,18 @@ export class MemStorage implements IStorage {
         eVisaAvailable: true,
         visaOnArrival: false,
       },
+      {
+        name: "Rusya",
+        code: "RU",
+        flag: "🇷🇺",
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+        description: "E-vize gerekli - Hizmet ücretimiz: 4.000 TL",
+        processingTime: "E-vize hizmeti - 30 gün",
+        fee: "4.000 TL (Hizmet ücreti)",
+        visaRequired: true,
+        eVisaAvailable: true,
+        visaOnArrival: false,
+      },
       // Vize Alınarak Giriş Yapılan Ülkeler
       {
         name: "Almanya",
