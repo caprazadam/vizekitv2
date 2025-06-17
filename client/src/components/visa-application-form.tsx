@@ -77,37 +77,58 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
   });
 
   const validatePersonalInfo = () => {
-    return personalInfo.firstName && personalInfo.lastName && personalInfo.email && 
-           personalInfo.phone && personalInfo.birthDate && personalInfo.address && 
-           personalInfo.city && personalInfo.zipCode;
+    const missing = [];
+    if (!personalInfo.firstName) missing.push("Ad");
+    if (!personalInfo.lastName) missing.push("Soyad");
+    if (!personalInfo.email) missing.push("E-posta");
+    if (!personalInfo.phone) missing.push("Telefon");
+    if (!personalInfo.birthDate) missing.push("Doğum Tarihi");
+    if (!personalInfo.nationality) missing.push("Uyruk");
+    if (!personalInfo.address) missing.push("Adres");
+    return missing;
   };
 
   const validatePassportInfo = () => {
-    return passportInfo.passportNumber && passportInfo.issueDate && 
-           passportInfo.expiryDate && passportInfo.placeOfIssue;
+    const missing = [];
+    if (!passportInfo.passportNumber) missing.push("Pasaport Numarası");
+    if (!passportInfo.issueDate) missing.push("Veriliş Tarihi");
+    if (!passportInfo.expiryDate) missing.push("Son Geçerlilik Tarihi");
+    if (!passportInfo.placeOfIssue) missing.push("Veriliş Yeri");
+    return missing;
   };
 
   const validatePaymentInfo = () => {
-    return paymentInfo.cardNumber && paymentInfo.expiryMonth && 
-           paymentInfo.expiryYear && paymentInfo.cvv && paymentInfo.cardholderName;
+    const missing = [];
+    if (!paymentInfo.cardholderName) missing.push("Kart Sahibinin Adı");
+    if (!paymentInfo.cardNumber) missing.push("Kart Numarası");
+    if (!paymentInfo.expiryMonth) missing.push("Son Kullanma Ayı");
+    if (!paymentInfo.expiryYear) missing.push("Son Kullanma Yılı");
+    if (!paymentInfo.cvv) missing.push("CVV");
+    return missing;
   };
 
   const handleNext = () => {
-    if (currentStep === 1 && !validatePersonalInfo()) {
-      toast({
-        title: "Eksik Bilgi",
-        description: "Lütfen tüm kişisel bilgileri doldurun",
-        variant: "destructive",
-      });
-      return;
+    if (currentStep === 1) {
+      const missingFields = validatePersonalInfo();
+      if (missingFields.length > 0) {
+        toast({
+          title: "Eksik Bilgi",
+          description: `Lütfen şu alanları doldurun: ${missingFields.join(", ")}`,
+          variant: "destructive",
+        });
+        return;
+      }
     }
-    if (currentStep === 2 && !validatePassportInfo()) {
-      toast({
-        title: "Eksik Bilgi", 
-        description: "Lütfen tüm pasaport bilgileri doldurun",
-        variant: "destructive",
-      });
-      return;
+    if (currentStep === 2) {
+      const missingFields = validatePassportInfo();
+      if (missingFields.length > 0) {
+        toast({
+          title: "Eksik Bilgi", 
+          description: `Lütfen şu alanları doldurun: ${missingFields.join(", ")}`,
+          variant: "destructive",
+        });
+        return;
+      }
     }
     setCurrentStep(currentStep + 1);
   };
@@ -117,10 +138,11 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
   };
 
   const handleSubmit = async () => {
-    if (!validatePaymentInfo()) {
+    const missingFields = validatePaymentInfo();
+    if (missingFields.length > 0) {
       toast({
         title: "Eksik Bilgi",
-        description: "Lütfen tüm ödeme bilgileri doldurun",
+        description: `Lütfen şu alanları doldurun: ${missingFields.join(", ")}`,
         variant: "destructive",
       });
       return;
