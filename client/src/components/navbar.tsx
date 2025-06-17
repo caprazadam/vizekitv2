@@ -12,6 +12,7 @@ export default function Navbar() {
     { href: "/visa-checker", label: "Vize Kontrol" },
     { href: "/countries", label: "Ülkeler" },
     { href: "/services", label: "Hizmetler" },
+    { href: "/application-status", label: "Başvuru Sorgula" },
     { href: "/about", label: "Hakkımızda" },
     { href: "/contact", label: "İletişim" },
   ];

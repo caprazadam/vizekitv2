@@ -150,18 +150,40 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
     setIsSubmitting(true);
     try {
-      // Simulate API call
+      // Generate application number with VK prefix
+      const applicationNumber = `VK${Date.now().toString().slice(-8)}${Math.floor(Math.random() * 100).toString().padStart(2, '0')}`;
+      
+      // Simulate PayTR payment processing
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      // Store application data (in real implementation, this would go to backend)
+      const applicationData = {
+        applicationNumber,
+        country: country.name,
+        purpose,
+        fee,
+        personalInfo,
+        passportInfo,
+        status: "Ödeme Alındı",
+        submissionDate: new Date().toISOString(),
+        estimatedProcessingDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString() // 5 days from now
+      };
+      
+      // Store in localStorage for demo (in production, use backend)
+      const existingApplications = JSON.parse(localStorage.getItem('visa-applications') || '[]');
+      existingApplications.push(applicationData);
+      localStorage.setItem('visa-applications', JSON.stringify(existingApplications));
+      
       toast({
-        title: "Başvuru Gönderildi",
-        description: "Vize başvurunuz başarıyla alındı. 24 saat içinde size dönüş yapacağız.",
+        title: "Ödeme Başarılı",
+        description: `Başvuru numaranız: ${applicationNumber}. Bu numarayı saklayın ve başvuru durumunuzu takip edin.`,
+        duration: 8000,
       });
       onClose();
     } catch (error) {
       toast({
-        title: "Hata",
-        description: "Başvuru gönderilemedi. Lütfen tekrar deneyin.",
+        title: "Ödeme Hatası",
+        description: "Ödeme işlemi gerçekleştirilemedi. Lütfen tekrar deneyin.",
         variant: "destructive",
       });
     } finally {
@@ -445,15 +467,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200/50 shadow-sm">
-                <h5 className="font-semibold text-green-900 mb-4 text-lg">Ödeme Özeti</h5>
-                <div className="text-base text-green-700">
-                  <div className="flex justify-between items-center py-2">
-                    <span className="font-medium">Hizmet Ücreti:</span>
-                    <span className="font-bold text-xl text-green-800">{fee}</span>
-                  </div>
-                </div>
-              </div>
+
             </div>
           )}
 
@@ -485,7 +499,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   disabled={isSubmitting}
                   className="px-8 py-3 text-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg disabled:opacity-50"
                 >
-                  {isSubmitting ? "Gönderiliyor..." : "Başvuruyu Gönder"}
+                  {isSubmitting ? "PayTR ile Ödeme Yapılıyor..." : "PayTR ile Güvenli Ödeme"}
                 </Button>
               )}
             </div>
