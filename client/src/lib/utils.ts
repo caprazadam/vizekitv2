@@ -10,9 +10,32 @@ export function formatCountryName(name: string): string {
 }
 
 export function formatProcessingTime(time: string): string {
-  return time;
+  const timeMap: Record<string, string> = {
+    "Instant": "Anında",
+    "On arrival": "Varışta",
+    "1-3 days": "1-3 gün",
+    "3-5 days": "3-5 gün", 
+    "5-10 days": "5-10 gün",
+    "7-10 days": "7-10 gün",
+    "10-20 days": "10-20 gün",
+    "Various": "Çeşitli"
+  };
+  return timeMap[time] || time;
 }
 
 export function formatFee(fee: string): string {
-  return fee;
+  // Convert USD to TL (approximate rate: 1 USD = 30 TL)
+  if (fee.includes("$")) {
+    const amount = fee.match(/\$(\d+)/);
+    if (amount) {
+      const tlAmount = parseInt(amount[1]) * 30;
+      return fee.replace(/From \$\d+/, `${tlAmount} TL'den başlayan`);
+    }
+  }
+  
+  const feeMap: Record<string, string> = {
+    "Varies": "Değişken",
+    "Free": "Ücretsiz"
+  };
+  return feeMap[fee] || fee;
 }
