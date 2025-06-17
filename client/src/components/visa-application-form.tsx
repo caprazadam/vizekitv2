@@ -98,13 +98,9 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
   };
 
   const validatePaymentInfo = () => {
-    const missing = [];
-    if (!paymentInfo.cardholderName) missing.push("Kart Sahibinin Adı");
-    if (!paymentInfo.cardNumber) missing.push("Kart Numarası");
-    if (!paymentInfo.expiryMonth) missing.push("Son Kullanma Ayı");
-    if (!paymentInfo.expiryYear) missing.push("Son Kullanma Yılı");
-    if (!paymentInfo.cvv) missing.push("CVV");
-    return missing;
+    // PayTR integration - no form validation needed for payment step
+    // Payment will be handled through PayTR's secure gateway
+    return [];
   };
 
   const handleNext = () => {
@@ -400,70 +396,51 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
           {/* Step 3: Payment */}
           {currentStep === 3 && (
             <div className="space-y-6">
-              <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Ödeme Bilgileri</h4>
-              <div>
-                <Label htmlFor="cardholderName">Kart Sahibinin Adı *</Label>
-                <Input
-                  id="cardholderName"
-                  value={paymentInfo.cardholderName}
-                  onChange={(e) => setPaymentInfo(prev => ({ ...prev, cardholderName: e.target.value }))}
-                  placeholder="JOHN DOE"
-                  className="mt-2"
-                />
+              <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Güvenli Ödeme</h4>
+              
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200/50 shadow-sm">
+                <h5 className="font-semibold text-green-900 mb-4 text-lg">Ödeme Özeti</h5>
+                <div className="text-base text-green-700">
+                  <div className="flex justify-between items-center py-2">
+                    <span className="font-medium">Hizmet Ücreti:</span>
+                    <span className="font-bold text-xl text-green-800">{fee}</span>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <Label htmlFor="cardNumber">Kart Numarası *</Label>
-                <Input
-                  id="cardNumber"
-                  value={paymentInfo.cardNumber}
-                  onChange={(e) => setPaymentInfo(prev => ({ ...prev, cardNumber: e.target.value }))}
-                  placeholder="1234 5678 9012 3456"
-                  maxLength={19}
-                  className="mt-2"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div>
-                  <Label htmlFor="expiryMonth">Ay *</Label>
-                  <Select value={paymentInfo.expiryMonth} onValueChange={(value) => setPaymentInfo(prev => ({ ...prev, expiryMonth: value }))}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Ay" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Array.from({ length: 12 }, (_, i) => (
-                        <SelectItem key={i + 1} value={String(i + 1).padStart(2, '0')}>
-                          {String(i + 1).padStart(2, '0')}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-200/50 shadow-sm">
+                <div className="flex items-center justify-center mb-4">
+                  <div className="bg-white p-3 rounded-lg shadow-sm border">
+                    <div className="text-2xl font-bold text-blue-600">PayTR</div>
+                  </div>
                 </div>
-                <div>
-                  <Label htmlFor="expiryYear">Yıl *</Label>
-                  <Select value={paymentInfo.expiryYear} onValueChange={(value) => setPaymentInfo(prev => ({ ...prev, expiryYear: value }))}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Yıl" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Array.from({ length: 10 }, (_, i) => (
-                        <SelectItem key={i} value={String(new Date().getFullYear() + i)}>
-                          {new Date().getFullYear() + i}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <h5 className="font-semibold text-blue-900 mb-3 text-lg text-center">PayTR Güvenli Ödeme</h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ul className="text-sm text-blue-700 space-y-2">
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                      256-bit SSL şifrelemesi
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                      3D Secure doğrulama
+                    </li>
+                  </ul>
+                  <ul className="text-sm text-blue-700 space-y-2">
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                      Visa, Mastercard, Amex
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
+                      Anında ödeme onayı
+                    </li>
+                  </ul>
                 </div>
-                <div>
-                  <Label htmlFor="cvv">CVV *</Label>
-                  <Input
-                    id="cvv"
-                    value={paymentInfo.cvv}
-                    onChange={(e) => setPaymentInfo(prev => ({ ...prev, cvv: e.target.value }))}
-                    placeholder="123"
-                    maxLength={4}
-                  />
+                <div className="mt-4 text-center">
+                  <p className="text-xs text-blue-600">
+                    Kredi kartı bilgileriniz PayTR güvenli ödeme altyapısında işlenir
+                  </p>
                 </div>
               </div>
 
