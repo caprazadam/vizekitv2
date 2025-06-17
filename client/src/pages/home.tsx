@@ -253,18 +253,20 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-slideInLeft">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Vize Hizmetlerimiz
+              🚀 AI Destekli Vize Hizmetlerimiz
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Seyahat planlamanızı kolaylaştırmak için kapsamlı vize yardımı
+              Yapay zeka teknolojisi ile hızlandırılmış vize süreçleri ve profesyonel danışmanlık
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {services.map((service, index) => (
+              <div key={service.id} className="animate-fadeInUp hover-lift" style={{animationDelay: `${index * 0.15}s`}}>
+                <ServiceCard service={service} />
+              </div>
             ))}
           </div>
         </div>
@@ -273,12 +275,12 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-slideInLeft">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Nasıl Çalışır
+              🤖 AI ile Nasıl Çalışır
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Vizenizin hızlı ve verimli bir şekilde onaylanması için basit adımlar
+              Yapay zeka destekli sürecimizle vizenizin hızlı ve doğru şekilde işlenmesi
             </p>
           </div>
 
@@ -286,28 +288,32 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Vizeyi Kontrol Et",
-                description: "Hedef ülkeniz için gereksinimleri belirlemek üzere vize kontrol aracımızı kullanın."
+                icon: "🤖",
+                title: "AI Vize Analizi",
+                description: "Yapay zeka algoritmamız saniyeler içinde en uygun vize seçeneklerini analiz eder."
               },
               {
                 step: "2",
-                title: "Belgeleri Hazırla",
-                description: "Detaylı kontrol listelerimiz ve uzman rehberliğimizle gerekli belgeleri toplayın."
+                icon: "📋",
+                title: "Akıllı Belge Listesi",
+                description: "Kişiselleştirilmiş belge listesi ve AI destekli kontrol sistemi ile hazırlık yapın."
               },
               {
                 step: "3",
-                title: "Başvuru Yap",
-                description: "Başvurunuzu gözden geçirip elçilik veya konsolosluğa sunuyoruz."
+                icon: "⚡",
+                title: "Hızlı Başvuru",
+                description: "Otomatik form doldurma ve uzman kontrolü ile başvurunuzu hızla tamamlayın."
               },
               {
                 step: "4",
-                title: "Vize Al",
-                description: "Başvuru durumunuzu takip edin ve onaylanan vizenizi alın."
+                icon: "✅",
+                title: "Vize Teslim",
+                description: "Real-time takip sistemi ile vizenizi güvenle teslim alın."
               }
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="w-20 h-20 bg-visa-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">{item.step}</span>
+            ].map((item, index) => (
+              <div key={item.step} className="text-center animate-fadeInUp hover-lift" style={{animationDelay: `${index * 0.2}s`}}>
+                <div className="w-20 h-20 ai-gradient rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-custom">
+                  <span className="text-3xl">{item.icon}</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
                 <p className="text-gray-600">{item.description}</p>
@@ -320,9 +326,9 @@ export default function Home() {
       {/* Document Requirements */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-slideInLeft">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Genel Belge Gereksinimleri
+              📋 AI Destekli Belge Kontrol
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Çoğu vize başvurusu için gerekli temel belgeler
