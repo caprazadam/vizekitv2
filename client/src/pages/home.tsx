@@ -450,38 +450,38 @@ export default function Home() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email
+                    E-posta
                   </label>
                   <Input
                     type="email"
                     value={consultationForm.email}
                     onChange={(e) => setConsultationForm(prev => ({ ...prev, email: e.target.value }))}
-                    placeholder="john@example.com"
+                    placeholder="ornek@email.com"
                     required
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone
+                    Telefon
                   </label>
                   <Input
                     type="tel"
                     value={consultationForm.phone}
                     onChange={(e) => setConsultationForm(prev => ({ ...prev, phone: e.target.value }))}
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="+90 (555) 123-4567"
                     required
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Destination Country
+                    Hedef Ülke
                   </label>
                   <Select 
                     value={consultationForm.destinationCountry} 
                     onValueChange={(value) => setConsultationForm(prev => ({ ...prev, destinationCountry: value }))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select destination..." />
+                      <SelectValue placeholder="Hedef ülke seçin..." />
                     </SelectTrigger>
                     <SelectContent>
                       {countries.map((country) => (
@@ -489,18 +489,18 @@ export default function Home() {
                           {country.flag} {country.name}
                         </SelectItem>
                       ))}
-                      <SelectItem value="Other">Other</SelectItem>
+                      <SelectItem value="Diğer">Diğer</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Message
+                    Mesajınız
                   </label>
                   <Textarea
                     value={consultationForm.message}
                     onChange={(e) => setConsultationForm(prev => ({ ...prev, message: e.target.value }))}
-                    placeholder="Tell us about your travel plans..."
+                    placeholder="Seyahat planlarınızı bize anlatın..."
                     rows={4}
                     required
                   />
@@ -510,7 +510,7 @@ export default function Home() {
                   className="w-full bg-visa-blue hover:bg-blue-700"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : "Request Consultation"}
+                  {isSubmitting ? "Gönderiliyor..." : "Danışmanlık Talebi Gönder"}
                 </Button>
               </form>
             </Card>
