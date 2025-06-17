@@ -188,7 +188,7 @@ export default function Home() {
                   disabled={isChecking}
                   className="w-full h-12 bg-visa-blue hover:bg-blue-700 text-lg font-semibold"
                 >
-                  {isChecking ? "Kontrol Ediliyor..." : "Vize Gereksinimlerini Kontrol Et"}
+                  {isChecking ? "Kontrol Ediliyor..." : "Vizeyi Kontrol Et"}
                 </Button>
               </div>
             </form>
