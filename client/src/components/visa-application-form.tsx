@@ -214,8 +214,9 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
           {/* Step 1: Personal Information */}
           {currentStep === 1 && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-6">
+              <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Kişisel Bilgiler</h4>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="firstName">Ad *</Label>
                   <Input
@@ -236,7 +237,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="email">E-posta *</Label>
                   <Input
@@ -258,7 +259,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="birthDate">Doğum Tarihi *</Label>
                   <Input
@@ -292,7 +293,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="city">Şehir *</Label>
                   <Input
@@ -317,7 +318,8 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
           {/* Step 2: Passport Information */}
           {currentStep === 2 && (
-            <div className="space-y-4">
+            <div className="space-y-6">
+              <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Pasaport Bilgileri</h4>
               <div>
                 <Label htmlFor="passportNumber">Pasaport Numarası *</Label>
                 <Input
@@ -325,10 +327,11 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   value={passportInfo.passportNumber}
                   onChange={(e) => setPassportInfo(prev => ({ ...prev, passportNumber: e.target.value }))}
                   placeholder="T12345678"
+                  className="mt-2"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="issueDate">Veriliş Tarihi *</Label>
                   <Input
@@ -356,12 +359,13 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   value={passportInfo.placeOfIssue}
                   onChange={(e) => setPassportInfo(prev => ({ ...prev, placeOfIssue: e.target.value }))}
                   placeholder="İstanbul"
+                  className="mt-2"
                 />
               </div>
 
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h5 className="font-medium text-blue-900 mb-2">Önemli Not</h5>
-                <p className="text-sm text-blue-700">
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-200/50 shadow-sm">
+                <h5 className="font-semibold text-blue-900 mb-3 text-lg">Önemli Not</h5>
+                <p className="text-base text-blue-700">
                   Pasaportunuzun vize başvurusu tarihinden itibaren en az 6 ay geçerli olması gerekmektedir.
                 </p>
               </div>
@@ -370,7 +374,8 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
           {/* Step 3: Payment */}
           {currentStep === 3 && (
-            <div className="space-y-4">
+            <div className="space-y-6">
+              <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Ödeme Bilgileri</h4>
               <div>
                 <Label htmlFor="cardholderName">Kart Sahibinin Adı *</Label>
                 <Input
@@ -378,6 +383,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   value={paymentInfo.cardholderName}
                   onChange={(e) => setPaymentInfo(prev => ({ ...prev, cardholderName: e.target.value }))}
                   placeholder="JOHN DOE"
+                  className="mt-2"
                 />
               </div>
 
@@ -389,10 +395,11 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   onChange={(e) => setPaymentInfo(prev => ({ ...prev, cardNumber: e.target.value }))}
                   placeholder="1234 5678 9012 3456"
                   maxLength={19}
+                  className="mt-2"
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div>
                   <Label htmlFor="expiryMonth">Ay *</Label>
                   <Select value={paymentInfo.expiryMonth} onValueChange={(value) => setPaymentInfo(prev => ({ ...prev, expiryMonth: value }))}>
