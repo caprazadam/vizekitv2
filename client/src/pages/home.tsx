@@ -107,17 +107,22 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section with Search Form */}
-      <section className="gradient-hero text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Vize Gereksinimlerini Kontrol Edin
+      <section className="ai-gradient text-white py-20 overflow-hidden relative">
+        <div className="absolute inset-0 opacity-10">
+          <div className="animate-float absolute top-10 left-10 w-20 h-20 bg-white rounded-full opacity-20"></div>
+          <div className="animate-float absolute top-32 right-20 w-16 h-16 bg-white rounded-full opacity-15" style={{animationDelay: '1s'}}></div>
+          <div className="animate-float absolute bottom-20 left-1/4 w-24 h-24 bg-white rounded-full opacity-10" style={{animationDelay: '2s'}}></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fadeInUp">
+            🤖 Yapay Zeka Destekli Vize Analizi
           </h1>
-          <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto">
-            200+ ülke için anında vize gereksinimleri, işlem süreleri ve başvuru rehberliği alın
+          <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto animate-fadeInUp" style={{animationDelay: '0.2s'}}>
+            Akıllı algoritmalarla 200+ ülke için anında vize gereksinimleri ve kişiselleştirilmiş öneriler
           </p>
           
           {/* Horizontal Search Form */}
-          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto">
+          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto animate-fadeInUp hover-lift" style={{animationDelay: '0.4s'}}>
             <form onSubmit={handleHeroFormSubmit} className="grid md:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
@@ -195,21 +200,21 @@ export default function Home() {
 
           {/* Features */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">
-            <div className="flex items-center text-blue-100">
+            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.6s'}}>
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>Anında Sonuç</span>
+              <span>🚀 Anında AI Analizi</span>
             </div>
-            <div className="flex items-center text-blue-100">
+            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.7s'}}>
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>200+ Ülke</span>
+              <span>🌍 200+ Ülke</span>
             </div>
-            <div className="flex items-center text-blue-100">
+            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.8s'}}>
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>Uzman Desteği</span>
+              <span>👨‍💼 Uzman Desteği</span>
             </div>
-            <div className="flex items-center text-blue-100">
+            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.9s'}}>
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>7/24 Hizmet</span>
+              <span>⏰ 7/24 Hizmet</span>
             </div>
           </div>
         </div>
@@ -218,25 +223,27 @@ export default function Home() {
       {/* Popular Destinations */}
       <section id="countries" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-slideInLeft">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Popüler Vize Destinasyonları
+              🌍 AI Destekli Popüler Destinasyonlar
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Dünya çapında en çok ziyaret edilen ülkeler için vize gereksinimlerini keşfedin
+              Yapay zeka analiziyle en çok tercih edilen ülkeler için özelleştirilmiş vize rehberi
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {popularCountries.map((country) => (
-              <CountryCard key={country.id} country={country} />
+            {popularCountries.map((country, index) => (
+              <div key={country.id} className="animate-fadeInUp hover-lift" style={{animationDelay: `${index * 0.1}s`}}>
+                <CountryCard country={country} />
+              </div>
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-10 animate-fadeInUp" style={{animationDelay: '1s'}}>
             <Link href="/countries">
-              <Button variant="outline" className="border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white">
-                Tüm Ülkeleri Gör
+              <Button variant="outline" className="border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white hover-scale">
+                🔍 Tüm Ülkeleri Keşfet
               </Button>
             </Link>
           </div>
