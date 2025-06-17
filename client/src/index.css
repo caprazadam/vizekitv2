@@ -24,15 +24,10 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* AI-inspired modern colors */
+  /* Custom visa service colors */
   --visa-blue: hsl(207, 90%, 54%);
   --visa-blue-light: hsl(207, 90%, 64%);
   --visa-blue-lighter: hsl(207, 90%, 74%);
-  --ai-gradient-start: hsl(264, 91%, 58%);
-  --ai-gradient-middle: hsl(207, 90%, 54%);
-  --ai-gradient-end: hsl(179, 82%, 51%);
-  --ai-accent: hsl(264, 91%, 58%);
-  --ai-neon: hsl(179, 100%, 60%);
 }
 
 .dark {
@@ -101,66 +96,6 @@
   --tw-ring-color: var(--visa-blue);
 }
 
-/* Modern AI-inspired gradients and animations */
 .gradient-hero {
-  background: linear-gradient(135deg, var(--ai-gradient-start) 0%, var(--ai-gradient-middle) 50%, var(--ai-gradient-end) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.gradient-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.ai-glow {
-  box-shadow: 0 0 20px rgba(179, 130, 255, 0.3), 0 0 40px rgba(179, 130, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.ai-glow:hover {
-  box-shadow: 0 0 30px rgba(179, 130, 255, 0.5), 0 0 60px rgba(179, 130, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.floating-animation {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-glow {
-  from { box-shadow: 0 0 10px rgba(23, 184, 190, 0.5); }
-  to { box-shadow: 0 0 20px rgba(23, 184, 190, 0.8), 0 0 30px rgba(23, 184, 190, 0.3); }
-}
-
-.gradient-border {
-  position: relative;
-  background: linear-gradient(white, white) padding-box,
-              linear-gradient(45deg, var(--ai-gradient-start), var(--ai-gradient-end)) border-box;
-  border: 2px solid transparent;
-}
-
-.glass-effect {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, var(--visa-blue) 0%, hsl(207, 90%, 44%) 100%);
 }
