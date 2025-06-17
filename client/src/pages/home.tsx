@@ -255,10 +255,27 @@ export default function Home() {
             </div>
           </div>
         </div>
+        
+        {/* Modern floating elements */}
+        <div className="absolute top-20 left-10 opacity-30 float-animation">
+          <div className="relative">
+            <Globe className="h-24 w-24 text-blue-300" />
+            <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl"></div>
+          </div>
+        </div>
+        <div className="absolute bottom-20 right-10 opacity-30 float-animation" style={{animationDelay: '1s'}}>
+          <div className="relative">
+            <Plane className="h-20 w-20 text-purple-300" />
+            <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-xl"></div>
+          </div>
+        </div>
+        <div className="absolute top-1/2 right-20 opacity-20 float-animation" style={{animationDelay: '2s'}}>
+          <Brain className="h-16 w-16 text-pink-300" />
+        </div>
       </section>
 
       {/* Popular Destinations */}
-      <section id="countries" className="py-16 bg-white">
+      <section id="countries" className="py-16 glass-effect">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
