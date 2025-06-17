@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { CheckCircle, Clock, DollarSign, FileText, Loader2 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import VisaApplicationForm from "@/components/visa-application-form";
 import type { Country } from "@shared/schema";
 
 interface VisaCheckResult {
@@ -29,6 +30,7 @@ export default function VisaCheckerForm() {
   const [purpose, setPurpose] = useState<string>("");
   const [result, setResult] = useState<VisaCheckResult | null>(null);
   const [isChecking, setIsChecking] = useState(false);
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
   const { toast } = useToast();
 
   const { data: countries = [] } = useQuery<Country[]>({
@@ -252,12 +254,25 @@ export default function VisaCheckerForm() {
             </div>
 
             {result.visaRequired && (
-              <Button className="w-full bg-visa-blue hover:bg-blue-700">
+              <Button 
+                className="w-full bg-visa-blue hover:bg-blue-700"
+                onClick={() => setShowApplicationForm(true)}
+              >
                 Başvuru Sürecini Başlat
               </Button>
             )}
           </CardContent>
         </Card>
+      )}
+
+      {/* Visa Application Form Modal */}
+      {showApplicationForm && result && (
+        <VisaApplicationForm
+          country={result.toCountry}
+          purpose={purpose}
+          fee={result.fee}
+          onClose={() => setShowApplicationForm(false)}
+        />
       )}
     </div>
   );
