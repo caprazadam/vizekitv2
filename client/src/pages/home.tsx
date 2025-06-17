@@ -107,22 +107,17 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section with Search Form */}
-      <section className="ai-gradient text-white py-20 overflow-hidden relative">
-        <div className="absolute inset-0 opacity-10">
-          <div className="animate-float absolute top-10 left-10 w-20 h-20 bg-white rounded-full opacity-20"></div>
-          <div className="animate-float absolute top-32 right-20 w-16 h-16 bg-white rounded-full opacity-15" style={{animationDelay: '1s'}}></div>
-          <div className="animate-float absolute bottom-20 left-1/4 w-24 h-24 bg-white rounded-full opacity-10" style={{animationDelay: '2s'}}></div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fadeInUp">
-            🤖 Yapay Zeka Destekli Vize Analizi
+      <section className="gradient-hero text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+            Vize Gereksinimlerini Kontrol Edin
           </h1>
-          <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto animate-fadeInUp" style={{animationDelay: '0.2s'}}>
-            Akıllı algoritmalarla 200+ ülke için anında vize gereksinimleri ve kişiselleştirilmiş öneriler
+          <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto">
+            200+ ülke için anında vize gereksinimleri, işlem süreleri ve başvuru rehberliği alın
           </p>
           
           {/* Horizontal Search Form */}
-          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto animate-fadeInUp hover-lift" style={{animationDelay: '0.4s'}}>
+          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto">
             <form onSubmit={handleHeroFormSubmit} className="grid md:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
@@ -200,21 +195,21 @@ export default function Home() {
 
           {/* Features */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">
-            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.6s'}}>
+            <div className="flex items-center text-blue-100">
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>🚀 Anında AI Analizi</span>
+              <span>Anında Sonuç</span>
             </div>
-            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.7s'}}>
+            <div className="flex items-center text-blue-100">
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>🌍 200+ Ülke</span>
+              <span>200+ Ülke</span>
             </div>
-            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.8s'}}>
+            <div className="flex items-center text-blue-100">
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>👨‍💼 Uzman Desteği</span>
+              <span>Uzman Desteği</span>
             </div>
-            <div className="flex items-center text-blue-100 animate-fadeInUp" style={{animationDelay: '0.9s'}}>
+            <div className="flex items-center text-blue-100">
               <CheckCircle className="h-5 w-5 mr-2" />
-              <span>⏰ 7/24 Hizmet</span>
+              <span>7/24 Hizmet</span>
             </div>
           </div>
         </div>
@@ -223,27 +218,25 @@ export default function Home() {
       {/* Popular Destinations */}
       <section id="countries" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-slideInLeft">
+          <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              🌍 AI Destekli Popüler Destinasyonlar
+              Popüler Vize Destinasyonları
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Yapay zeka analiziyle en çok tercih edilen ülkeler için özelleştirilmiş vize rehberi
+              Dünya çapında en çok ziyaret edilen ülkeler için vize gereksinimlerini keşfedin
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {popularCountries.map((country, index) => (
-              <div key={country.id} className="animate-fadeInUp hover-lift" style={{animationDelay: `${index * 0.1}s`}}>
-                <CountryCard country={country} />
-              </div>
+            {popularCountries.map((country) => (
+              <CountryCard key={country.id} country={country} />
             ))}
           </div>
 
-          <div className="text-center mt-10 animate-fadeInUp" style={{animationDelay: '1s'}}>
+          <div className="text-center mt-10">
             <Link href="/countries">
-              <Button variant="outline" className="border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white hover-scale">
-                🔍 Tüm Ülkeleri Keşfet
+              <Button variant="outline" className="border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white">
+                Tüm Ülkeleri Gör
               </Button>
             </Link>
           </div>
@@ -253,20 +246,18 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-slideInLeft">
+          <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              🚀 AI Destekli Vize Hizmetlerimiz
+              Vize Hizmetlerimiz
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Yapay zeka teknolojisi ile hızlandırılmış vize süreçleri ve profesyonel danışmanlık
+              Seyahat planlamanızı kolaylaştırmak için kapsamlı vize yardımı
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div key={service.id} className="animate-fadeInUp hover-lift" style={{animationDelay: `${index * 0.15}s`}}>
-                <ServiceCard service={service} />
-              </div>
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
             ))}
           </div>
         </div>
@@ -275,12 +266,12 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-slideInLeft">
+          <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              🤖 AI ile Nasıl Çalışır
+              Nasıl Çalışır
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Yapay zeka destekli sürecimizle vizenizin hızlı ve doğru şekilde işlenmesi
+              Vizenizin hızlı ve verimli bir şekilde onaylanması için basit adımlar
             </p>
           </div>
 
@@ -288,32 +279,28 @@ export default function Home() {
             {[
               {
                 step: "1",
-                icon: "🤖",
-                title: "AI Vize Analizi",
-                description: "Yapay zeka algoritmamız saniyeler içinde en uygun vize seçeneklerini analiz eder."
+                title: "Vizeyi Kontrol Et",
+                description: "Hedef ülkeniz için gereksinimleri belirlemek üzere vize kontrol aracımızı kullanın."
               },
               {
                 step: "2",
-                icon: "📋",
-                title: "Akıllı Belge Listesi",
-                description: "Kişiselleştirilmiş belge listesi ve AI destekli kontrol sistemi ile hazırlık yapın."
+                title: "Belgeleri Hazırla",
+                description: "Detaylı kontrol listelerimiz ve uzman rehberliğimizle gerekli belgeleri toplayın."
               },
               {
                 step: "3",
-                icon: "⚡",
-                title: "Hızlı Başvuru",
-                description: "Otomatik form doldurma ve uzman kontrolü ile başvurunuzu hızla tamamlayın."
+                title: "Başvuru Yap",
+                description: "Başvurunuzu gözden geçirip elçilik veya konsolosluğa sunuyoruz."
               },
               {
                 step: "4",
-                icon: "✅",
-                title: "Vize Teslim",
-                description: "Real-time takip sistemi ile vizenizi güvenle teslim alın."
+                title: "Vize Al",
+                description: "Başvuru durumunuzu takip edin ve onaylanan vizenizi alın."
               }
-            ].map((item, index) => (
-              <div key={item.step} className="text-center animate-fadeInUp hover-lift" style={{animationDelay: `${index * 0.2}s`}}>
-                <div className="w-20 h-20 ai-gradient rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-custom">
-                  <span className="text-3xl">{item.icon}</span>
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="w-20 h-20 bg-visa-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                  <span className="text-2xl font-bold text-white">{item.step}</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
                 <p className="text-gray-600">{item.description}</p>
@@ -326,9 +313,9 @@ export default function Home() {
       {/* Document Requirements */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-slideInLeft">
+          <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              📋 AI Destekli Belge Kontrol
+              Genel Belge Gereksinimleri
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Çoğu vize başvurusu için gerekli temel belgeler
