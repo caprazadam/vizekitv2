@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, DollarSign } from "lucide-react";
+import { Clock } from "lucide-react";
 import type { Country } from "@shared/schema";
 
 interface CountryCardProps {
@@ -42,7 +42,6 @@ export default function CountryCard({ country }: CountryCardProps) {
               İşlem: {country.processingTime}
             </div>
             <div className="text-sm text-green-600 font-medium">
-              <DollarSign className="h-4 w-4 inline mr-1" />
               {country.fee}
             </div>
           </div>

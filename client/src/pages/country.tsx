@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle, Clock, DollarSign, FileText, ArrowLeft } from "lucide-react";
+import { CheckCircle, Clock, FileText, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 import type { Country } from "@shared/schema";
 
@@ -122,7 +122,6 @@ export default function CountryPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <DollarSign className="h-4 w-4 text-visa-blue" />
                       <h3 className="font-semibold">Vize Ücreti</h3>
                     </div>
                     <p className="text-green-600 font-medium">{country.fee}</p>

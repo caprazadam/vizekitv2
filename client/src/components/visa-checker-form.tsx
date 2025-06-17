@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle, Clock, DollarSign, FileText, Loader2 } from "lucide-react";
+import { CheckCircle, Clock, FileText, Loader2 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import VisaApplicationForm from "@/components/visa-application-form";
@@ -228,7 +228,6 @@ export default function VisaCheckerForm() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-visa-blue" />
                 <div>
                   <div className="text-sm text-gray-600">Ücret</div>
                   <div className="font-medium text-green-600">{result.fee}</div>
