@@ -24,8 +24,8 @@ export default function Navbar() {
             mobile ? "block px-3 py-2" : "px-3 py-2"
           } text-sm font-medium transition-colors ${
             location === item.href
-              ? "text-visa-blue"
-              : "text-gray-600 hover:text-visa-blue"
+              ? "text-purple-600"
+              : "text-gray-600 hover:text-purple-600"
           }`}
         >
           {item.label}
@@ -41,7 +41,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-visa-blue cursor-pointer">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent cursor-pointer">
                   VizeHizmet
                 </h1>
               </Link>
@@ -52,11 +52,11 @@ export default function Navbar() {
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-visa-blue">
+            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600">
               <Phone className="h-4 w-4 mr-2" />
               +90 (212) 123-4567
             </Button>
-            <Button className="bg-visa-blue hover:bg-blue-700">
+            <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 shadow-lg shadow-purple-500/30">
               Başla
             </Button>
           </div>
@@ -77,7 +77,7 @@ export default function Navbar() {
                       <Phone className="h-4 w-4 mr-2" />
                       +90 (212) 123-4567
                     </Button>
-                    <Button className="w-full bg-visa-blue hover:bg-blue-700">
+                    <Button className="w-full bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 shadow-lg shadow-purple-500/30">
                       Başla
                     </Button>
                   </div>

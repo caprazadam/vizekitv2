@@ -24,10 +24,10 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Custom visa service colors */
-  --visa-blue: hsl(207, 90%, 54%);
-  --visa-blue-light: hsl(207, 90%, 64%);
-  --visa-blue-lighter: hsl(207, 90%, 74%);
+  /* Custom visa service colors - Purple/Neon theme */
+  --visa-blue: hsl(270, 91%, 65%);
+  --visa-blue-light: hsl(270, 91%, 75%);
+  --visa-blue-lighter: hsl(270, 91%, 85%);
 }
 
 .dark {

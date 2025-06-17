@@ -221,7 +221,7 @@ export default function VisaCheckerForm() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-visa-blue" />
+                <Clock className="h-4 w-4 text-purple-600" />
                 <div>
                   <div className="text-sm text-gray-600">İşlem Süresi</div>
                   <div className="font-medium">{result.processingTime}</div>
@@ -239,7 +239,7 @@ export default function VisaCheckerForm() {
 
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <FileText className="h-4 w-4 text-visa-blue" />
+                <FileText className="h-4 w-4 text-purple-600" />
                 <h4 className="font-semibold">Gerekli Belgeler</h4>
               </div>
               <ul className="space-y-2">
@@ -254,7 +254,7 @@ export default function VisaCheckerForm() {
 
             {result.visaRequired && (
               <Button 
-                className="w-full bg-visa-blue hover:bg-blue-700"
+                className="w-full bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 shadow-lg shadow-purple-500/30"
                 onClick={() => setShowApplicationForm(true)}
               >
                 Başvuru Sürecini Başlat
