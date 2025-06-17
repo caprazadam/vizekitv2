@@ -221,10 +221,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Popular Visa Destinations
+              Popüler Vize Destinasyonları
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore visa requirements for the most visited countries worldwide
+              Dünya çapında en çok ziyaret edilen ülkeler için vize gereksinimlerini keşfedin
             </p>
           </div>
           
@@ -249,10 +249,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Our Visa Services
+              Vize Hizmetlerimiz
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive visa assistance to make your travel planning effortless
+              Seyahat planlamanızı kolaylaştırmak için kapsamlı vize yardımı
             </p>
           </div>
 
@@ -269,10 +269,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              How It Works
+              Nasıl Çalışır
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Simple steps to get your visa approved quickly and efficiently
+              Vizenizin hızlı ve verimli bir şekilde onaylanması için basit adımlar
             </p>
           </div>
 
@@ -280,23 +280,23 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Check Requirements",
-                description: "Use our visa checker tool to determine requirements for your destination country."
+                title: "Gereksinimleri Kontrol Et",
+                description: "Hedef ülkeniz için gereksinimleri belirlemek üzere vize kontrol aracımızı kullanın."
               },
               {
                 step: "2",
-                title: "Prepare Documents",
-                description: "Gather required documents with our detailed checklists and expert guidance."
+                title: "Belgeleri Hazırla",
+                description: "Detaylı kontrol listelerimiz ve uzman rehberliğimizle gerekli belgeleri toplayın."
               },
               {
                 step: "3",
-                title: "Submit Application",
-                description: "We review and submit your application to the embassy or consulate."
+                title: "Başvuru Yap",
+                description: "Başvurunuzu gözden geçirip elçilik veya konsolosluğa sunuyoruz."
               },
               {
                 step: "4",
-                title: "Receive Visa",
-                description: "Track your application status and receive your approved visa."
+                title: "Vize Al",
+                description: "Başvuru durumunuzu takip edin ve onaylanan vizenizi alın."
               }
             ].map((item) => (
               <div key={item.step} className="text-center">

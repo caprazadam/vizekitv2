@@ -54,10 +54,10 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="sm" className="text-gray-600 hover:text-visa-blue">
               <Phone className="h-4 w-4 mr-2" />
-              +1 (555) 123-4567
+              +90 (212) 123-4567
             </Button>
             <Button className="bg-visa-blue hover:bg-blue-700">
-              Get Started
+              Başla
             </Button>
           </div>
 
@@ -75,10 +75,10 @@ export default function Navbar() {
                   <div className="border-t pt-4">
                     <Button variant="ghost" size="sm" className="w-full justify-start mb-2">
                       <Phone className="h-4 w-4 mr-2" />
-                      +1 (555) 123-4567
+                      +90 (212) 123-4567
                     </Button>
                     <Button className="w-full bg-visa-blue hover:bg-blue-700">
-                      Get Started
+                      Başla
                     </Button>
                   </div>
                 </div>
