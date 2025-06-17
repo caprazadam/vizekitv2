@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, Phone, Mail, Clock } from "lucide-react";
+import { CheckCircle, Phone, Mail, Clock, Sparkles, Zap, Brain, Bot } from "lucide-react";
 import { useState } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -107,17 +107,32 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section with Search Form */}
-      <section className="gradient-hero text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Vize Gereksinimlerini Kontrol Edin
-          </h1>
+      <section className="gradient-hero text-white py-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="floating-animation">
+            <div className="flex items-center justify-center mb-6">
+              <Bot className="h-12 w-12 mr-4 text-cyan-300 pulse-glow" />
+              <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-white via-cyan-100 to-purple-200 bg-clip-text text-transparent">
+                AI Destekli Vize Kontrol
+              </h1>
+              <Sparkles className="h-12 w-12 ml-4 text-purple-300 pulse-glow" />
+            </div>
+          </div>
           <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto">
-            200+ ülke için anında vize gereksinimleri, işlem süreleri ve başvuru rehberliği alın
+            <span className="inline-flex items-center">
+              <Brain className="h-6 w-6 mr-2 text-cyan-300" />
+              Yapay zeka ile 200+ ülke için anında vize gereksinimleri ve akıllı öneriler
+              <Zap className="h-6 w-6 ml-2 text-yellow-300" />
+            </span>
           </p>
           
-          {/* Horizontal Search Form */}
-          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto">
+          {/* AI-Powered Search Form */}
+          <div className="glass-effect ai-glow rounded-xl p-8 text-gray-900 max-w-5xl mx-auto gradient-border">
+            <div className="flex items-center justify-center mb-4">
+              <Sparkles className="h-5 w-5 mr-2 text-purple-600" />
+              <span className="text-sm font-medium text-gray-700">AI Destekli Akıllı Arama</span>
+              <Zap className="h-5 w-5 ml-2 text-cyan-600" />
+            </div>
             <form onSubmit={handleHeroFormSubmit} className="grid md:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
@@ -185,31 +200,44 @@ export default function Home() {
                 <Button 
                   type="submit" 
                   disabled={isChecking}
-                  className="w-full h-12 bg-visa-blue hover:bg-blue-700 text-lg font-semibold"
+                  className="w-full h-12 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700 text-lg font-semibold text-white ai-glow transition-all duration-300 relative overflow-hidden"
                 >
-                  {isChecking ? "Kontrol Ediliyor..." : "Vizeyi Kontrol Et"}
+                  <span className="relative z-10 flex items-center justify-center">
+                    {isChecking ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                        AI Analiz Ediyor...
+                      </>
+                    ) : (
+                      <>
+                        <Bot className="h-5 w-5 mr-2" />
+                        AI ile Vize Kontrol Et
+                        <Sparkles className="h-4 w-4 ml-2" />
+                      </>
+                    )}
+                  </span>
                 </Button>
               </div>
             </form>
           </div>
 
-          {/* Features */}
+          {/* AI-Powered Features */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">
-            <div className="flex items-center text-blue-100">
-              <CheckCircle className="h-5 w-5 mr-2" />
-              <span>Anında Sonuç</span>
+            <div className="flex items-center text-cyan-100 ai-glow p-3 rounded-lg bg-white/10">
+              <Zap className="h-5 w-5 mr-2 text-yellow-300 pulse-glow" />
+              <span>Anında AI Analiz</span>
             </div>
-            <div className="flex items-center text-blue-100">
-              <CheckCircle className="h-5 w-5 mr-2" />
-              <span>200+ Ülke</span>
+            <div className="flex items-center text-cyan-100 ai-glow p-3 rounded-lg bg-white/10">
+              <Brain className="h-5 w-5 mr-2 text-purple-300 pulse-glow" />
+              <span>200+ Ülke Veritabanı</span>
             </div>
-            <div className="flex items-center text-blue-100">
-              <CheckCircle className="h-5 w-5 mr-2" />
-              <span>Uzman Desteği</span>
+            <div className="flex items-center text-cyan-100 ai-glow p-3 rounded-lg bg-white/10">
+              <Bot className="h-5 w-5 mr-2 text-cyan-300 pulse-glow" />
+              <span>AI Uzman Desteği</span>
             </div>
-            <div className="flex items-center text-blue-100">
-              <CheckCircle className="h-5 w-5 mr-2" />
-              <span>7/24 Hizmet</span>
+            <div className="flex items-center text-cyan-100 ai-glow p-3 rounded-lg bg-white/10">
+              <Sparkles className="h-5 w-5 mr-2 text-pink-300 pulse-glow" />
+              <span>7/24 Akıllı Hizmet</span>
             </div>
           </div>
         </div>
