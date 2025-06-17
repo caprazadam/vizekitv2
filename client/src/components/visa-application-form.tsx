@@ -154,26 +154,31 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <CardHeader>
+    <div className="fixed inset-0 bg-black bg-opacity-80 z-50 overflow-hidden">
+      <Card className="w-full h-full rounded-none border-0 flex flex-col">
+        <CardHeader className="flex-shrink-0 bg-gradient-to-r from-purple-600 to-violet-600 text-white">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-xl">
+            <CardTitle className="text-xl font-bold">
               {country.flag} {country.name} Vize Başvurusu
             </CardTitle>
-            <Button variant="ghost" size="sm" onClick={onClose}>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={onClose}
+              className="text-white hover:bg-white/20 hover:text-white w-10 h-10 rounded-full"
+            >
               ✕
             </Button>
           </div>
           
           {/* Step indicator */}
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center mt-6">
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center">
                 <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
                   currentStep >= step.number 
-                    ? 'bg-visa-blue border-visa-blue text-white' 
-                    : 'border-gray-300 text-gray-400'
+                    ? 'bg-white border-white text-purple-600' 
+                    : 'border-white/50 text-white/70'
                 }`}>
                   {currentStep > step.number ? (
                     <CheckCircle className="h-5 w-5" />
@@ -183,21 +188,21 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 </div>
                 {index < steps.length - 1 && (
                   <div className={`w-16 h-0.5 ${
-                    currentStep > step.number ? 'bg-visa-blue' : 'bg-gray-300'
+                    currentStep > step.number ? 'bg-white' : 'bg-white/30'
                   }`} />
                 )}
               </div>
             ))}
           </div>
           
-          <div className="text-center mt-2">
-            <h3 className="font-medium">{steps[currentStep - 1].title}</h3>
+          <div className="text-center mt-3">
+            <h3 className="font-medium text-white">{steps[currentStep - 1].title}</h3>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-6">
+        <CardContent className="flex-1 overflow-y-auto space-y-6 p-6">
           {/* Application Summary */}
-          <div className="bg-gray-50 p-4 rounded-lg">
+          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
             <h4 className="font-medium mb-2">Başvuru Özeti</h4>
             <div className="text-sm text-gray-600 space-y-1">
               <div>Hedef Ülke: {country.name}</div>
@@ -442,9 +447,9 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between pt-4">
+          <div className="flex justify-between pt-6 border-t border-purple-200 bg-gray-50 p-4 -m-6 mt-6">
             {currentStep > 1 && (
-              <Button variant="outline" onClick={handlePrevious}>
+              <Button variant="outline" onClick={handlePrevious} className="border-purple-300 text-purple-600 hover:bg-purple-50">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Geri
               </Button>
@@ -452,7 +457,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
             
             <div className="ml-auto">
               {currentStep < 3 ? (
-                <Button onClick={handleNext} className="bg-visa-blue hover:bg-blue-700">
+                <Button onClick={handleNext} className="bg-purple-600 hover:bg-purple-700">
                   İleri
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
