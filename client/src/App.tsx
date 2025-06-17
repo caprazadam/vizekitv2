@@ -9,6 +9,7 @@ import Countries from "@/pages/countries";
 import VisaChecker from "@/pages/visa-checker";
 import Services from "@/pages/services";
 import ApplicationStatus from "@/pages/application-status";
+import Admin from "@/pages/admin";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/visa-checker" component={VisaChecker} />
       <Route path="/services" component={Services} />
       <Route path="/application-status" component={ApplicationStatus} />
+      <Route path="/admin" component={Admin} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />

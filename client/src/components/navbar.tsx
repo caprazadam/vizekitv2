@@ -13,6 +13,7 @@ export default function Navbar() {
     { href: "/countries", label: "Ülkeler" },
     { href: "/services", label: "Hizmetler" },
     { href: "/application-status", label: "Başvuru Sorgula" },
+    { href: "/admin", label: "Yönetici" },
     { href: "/about", label: "Hakkımızda" },
     { href: "/contact", label: "İletişim" },
   ];
