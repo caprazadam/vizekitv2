@@ -154,50 +154,56 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xl">
-              {country.flag} {country.name} Vize Başvurusu
-            </CardTitle>
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              ✕
-            </Button>
-          </div>
-          
-          {/* Step indicator */}
-          <div className="flex justify-center mt-4">
-            {steps.map((step, index) => (
-              <div key={step.number} className="flex items-center">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
-                  currentStep >= step.number 
-                    ? 'bg-visa-blue border-visa-blue text-white' 
-                    : 'border-gray-300 text-gray-400'
-                }`}>
-                  {currentStep > step.number ? (
-                    <CheckCircle className="h-5 w-5" />
-                  ) : (
-                    <step.icon className="h-5 w-5" />
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-50">
+      <Card className="w-full max-w-5xl max-h-[95vh] overflow-hidden shadow-2xl border-0 bg-gradient-to-br from-white via-purple-50/30 to-violet-50/20">
+        <div className="max-h-[95vh] overflow-y-auto">
+          <CardHeader className="bg-gradient-to-r from-purple-600/5 to-violet-600/5 border-b border-purple-200/30">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
+                {country.flag} {country.name} Vize Başvurusu
+              </CardTitle>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={onClose}
+                className="w-10 h-10 p-0 hover:bg-purple-100 rounded-full border border-purple-200 shadow-sm"
+              >
+                <span className="text-purple-600 font-bold">✕</span>
+              </Button>
+            </div>
+            
+            {/* Step indicator */}
+            <div className="flex justify-center mt-8">
+              {steps.map((step, index) => (
+                <div key={step.number} className="flex items-center">
+                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+                    currentStep >= step.number 
+                      ? 'bg-gradient-to-r from-purple-500 to-violet-500 border-purple-500 text-white shadow-lg' 
+                      : 'border-gray-300 text-gray-400 bg-white'
+                  }`}>
+                    {currentStep > step.number ? (
+                      <CheckCircle className="h-6 w-6" />
+                    ) : (
+                      <step.icon className="h-6 w-6" />
+                    )}
+                  </div>
+                  {index < steps.length - 1 && (
+                    <div className={`w-20 h-1 rounded transition-all duration-300 ${
+                      currentStep > step.number ? 'bg-gradient-to-r from-purple-500 to-violet-500' : 'bg-gray-300'
+                    }`} />
                   )}
                 </div>
-                {index < steps.length - 1 && (
-                  <div className={`w-16 h-0.5 ${
-                    currentStep > step.number ? 'bg-visa-blue' : 'bg-gray-300'
-                  }`} />
-                )}
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-2">
-            <h3 className="font-medium">{steps[currentStep - 1].title}</h3>
-          </div>
-        </CardHeader>
+              ))}
+            </div>
+            
+            <div className="text-center mt-4">
+              <h3 className="text-lg font-semibold text-gray-800">{steps[currentStep - 1].title}</h3>
+            </div>
+          </CardHeader>
 
-        <CardContent className="space-y-6">
-          {/* Application Summary */}
-          <div className="bg-gray-50 p-4 rounded-lg">
+          <CardContent className="space-y-8 p-6 sm:p-8">
+            {/* Application Summary */}
+            <div className="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-xl border border-purple-200/50 shadow-sm">
             <h4 className="font-medium mb-2">Başvuru Özeti</h4>
             <div className="text-sm text-gray-600 space-y-1">
               <div>Hedef Ülke: {country.name}</div>
@@ -429,12 +435,12 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 </div>
               </div>
 
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h5 className="font-medium text-green-900 mb-2">Ödeme Özeti</h5>
-                <div className="text-sm text-green-700">
-                  <div className="flex justify-between">
-                    <span>Hizmet Ücreti:</span>
-                    <span className="font-medium">{fee}</span>
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200/50 shadow-sm">
+                <h5 className="font-semibold text-green-900 mb-4 text-lg">Ödeme Özeti</h5>
+                <div className="text-base text-green-700">
+                  <div className="flex justify-between items-center py-2">
+                    <span className="font-medium">Hizmet Ücreti:</span>
+                    <span className="font-bold text-xl text-green-800">{fee}</span>
                   </div>
                 </div>
               </div>
@@ -442,25 +448,32 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between pt-4">
+          <div className="flex justify-between pt-8 border-t border-purple-200/30">
             {currentStep > 1 && (
-              <Button variant="outline" onClick={handlePrevious}>
-                <ArrowLeft className="h-4 w-4 mr-2" />
+              <Button 
+                variant="outline" 
+                onClick={handlePrevious}
+                className="px-8 py-3 text-lg border-purple-300 hover:bg-purple-50 hover:border-purple-400"
+              >
+                <ArrowLeft className="h-5 w-5 mr-3" />
                 Geri
               </Button>
             )}
             
             <div className="ml-auto">
               {currentStep < 3 ? (
-                <Button onClick={handleNext} className="bg-visa-blue hover:bg-blue-700">
+                <Button 
+                  onClick={handleNext} 
+                  className="px-8 py-3 text-lg bg-gradient-to-r from-purple-500 to-violet-500 hover:from-purple-600 hover:to-violet-600 shadow-lg"
+                >
                   İleri
-                  <ArrowRight className="h-4 w-4 ml-2" />
+                  <ArrowRight className="h-5 w-5 ml-3" />
                 </Button>
               ) : (
                 <Button 
                   onClick={handleSubmit} 
                   disabled={isSubmitting}
-                  className="bg-green-600 hover:bg-green-700"
+                  className="px-8 py-3 text-lg bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg disabled:opacity-50"
                 >
                   {isSubmitting ? "Gönderiliyor..." : "Başvuruyu Gönder"}
                 </Button>
@@ -468,6 +481,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
             </div>
           </div>
         </CardContent>
+        </div>
       </Card>
     </div>
   );
