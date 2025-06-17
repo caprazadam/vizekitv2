@@ -42,6 +42,7 @@ interface ApplicationData {
     expiryDate: string;
     placeOfIssue: string;
   };
+  paymentMethod?: string;
   status: string;
   submissionDate: string;
   estimatedProcessingDate: string;
