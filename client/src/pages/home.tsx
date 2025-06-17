@@ -26,7 +26,7 @@ export default function Home() {
     message: "",
   });
   const [heroForm, setHeroForm] = useState({
-    fromCountry: "",
+    fromCountry: "TR",
     toCountry: "",
     purpose: "",
   });

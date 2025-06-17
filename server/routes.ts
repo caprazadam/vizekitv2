@@ -82,8 +82,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Destination country not found" });
       }
 
-      // For now, return the destination country info as visa requirement
-      // In a real app, this would check specific visa requirements
+      // Generate appropriate message for visa-free countries
+      let customMessage = "";
+      if (!toCountryData.visaRequired) {
+        customMessage = `Ücretsiz giriş\nTürk pasaportunuz varsa ${toCountryData.name} seyahat etmek için vizeye ihtiyacınız yoktur.\nTüm Türkiye pasaport kategorileri için vizesiz seyahat - (${toCountryData.processingTime.replace('Vizesiz - ', '')})`;
+      }
+
       const result = {
         fromCountry: fromCountryData,
         toCountry: toCountryData,
@@ -93,13 +97,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         visaOnArrival: toCountryData.visaOnArrival,
         processingTime: toCountryData.processingTime,
         fee: toCountryData.fee,
-        documents: [
+        customMessage,
+        documents: toCountryData.visaRequired ? [
           "Geçerli pasaport (6+ ay geçerlilik)",
           "Pasaport fotoğrafları",
           "Banka ekstreleri (3-6 ay)",
           "Seyahat programı",
           "Otel rezervasyonları",
           "Seyahat sigortası"
+        ] : [
+          "Geçerli Türk pasaportu",
+          "Gidiş-dönüş uçak bileti",
+          "Otel rezervasyonu (opsiyonel)"
         ]
       };
 

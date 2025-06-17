@@ -19,11 +19,12 @@ interface VisaCheckResult {
   visaOnArrival: boolean;
   processingTime: string;
   fee: string;
+  customMessage?: string;
   documents: string[];
 }
 
 export default function VisaCheckerForm() {
-  const [fromCountry, setFromCountry] = useState<string>("");
+  const [fromCountry, setFromCountry] = useState<string>("TR");
   const [toCountry, setToCountry] = useState<string>("");
   const [purpose, setPurpose] = useState<string>("");
   const [result, setResult] = useState<VisaCheckResult | null>(null);
