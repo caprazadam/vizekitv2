@@ -51,13 +51,10 @@ export default function Navbar() {
             </nav>
           </div>
           
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center">
             <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600">
               <Phone className="h-4 w-4 mr-2" />
               +90 (212) 123-4567
-            </Button>
-            <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 shadow-lg shadow-purple-500/30">
-              Başla
             </Button>
           </div>
 
@@ -73,12 +70,9 @@ export default function Navbar() {
                 <div className="flex flex-col space-y-4 mt-6">
                   <NavLinks mobile />
                   <div className="border-t pt-4">
-                    <Button variant="ghost" size="sm" className="w-full justify-start mb-2">
+                    <Button variant="ghost" size="sm" className="w-full justify-start">
                       <Phone className="h-4 w-4 mr-2" />
                       +90 (212) 123-4567
-                    </Button>
-                    <Button className="w-full bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 shadow-lg shadow-purple-500/30">
-                      Başla
                     </Button>
                   </div>
                 </div>
