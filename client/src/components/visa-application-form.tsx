@@ -293,26 +293,7 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 />
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="city">Şehir *</Label>
-                  <Input
-                    id="city"
-                    value={personalInfo.city}
-                    onChange={(e) => setPersonalInfo(prev => ({ ...prev, city: e.target.value }))}
-                    placeholder="İstanbul"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="zipCode">Posta Kodu *</Label>
-                  <Input
-                    id="zipCode"
-                    value={personalInfo.zipCode}
-                    onChange={(e) => setPersonalInfo(prev => ({ ...prev, zipCode: e.target.value }))}
-                    placeholder="34000"
-                  />
-                </div>
-              </div>
+
             </div>
           )}
 
