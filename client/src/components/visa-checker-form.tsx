@@ -120,11 +120,16 @@ export default function VisaCheckerForm() {
                   <SelectValue placeholder="Amaç seçin..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="tourism">Turizm</SelectItem>
-                  <SelectItem value="business">İş</SelectItem>
-                  <SelectItem value="transit">Transit</SelectItem>
-                  <SelectItem value="work">Çalışma</SelectItem>
-                  <SelectItem value="study">Eğitim</SelectItem>
+                  <SelectItem value="tourist">Turistik Vize</SelectItem>
+                  <SelectItem value="business">Ticari Vize / İş Vizesi</SelectItem>
+                  <SelectItem value="student">Öğrenci / Eğitim Vizesi</SelectItem>
+                  <SelectItem value="family">Aile Birleşimi Vizesi</SelectItem>
+                  <SelectItem value="work">Çalışma Vizesi</SelectItem>
+                  <SelectItem value="transit">Transit Vize</SelectItem>
+                  <SelectItem value="medical">Sağlık (Tedavi) Vizesi</SelectItem>
+                  <SelectItem value="official">Resmi/Diplomatik Vize</SelectItem>
+                  <SelectItem value="cultural">Kültürel Etkinlik Vizesi</SelectItem>
+                  <SelectItem value="investor">Yatırımcı / Girişimci Vizesi</SelectItem>
                 </SelectContent>
               </Select>
             </div>
