@@ -134,18 +134,18 @@ export default function CountryPage() {
             {/* Document Requirements */}
             <Card>
               <CardHeader>
-                <CardTitle>Required Documents</CardTitle>
+                <CardTitle>Gerekli Belgeler</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3">Basic Documents</h4>
+                    <h4 className="font-semibold mb-3">Temel Belgeler</h4>
                     <ul className="space-y-2">
                       {[
-                        "Valid passport (6+ months)",
-                        "Passport-size photographs",
-                        "Completed visa application form",
-                        "Proof of travel insurance"
+                        "Geçerli pasaport (6+ ay)",
+                        "Pasaport fotoğrafları",
+                        "Doldurulmuş vize başvuru formu",
+                        "Seyahat sigortası belgesi"
                       ].map((doc, index) => (
                         <li key={index} className="flex items-center gap-2 text-sm">
                           <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
@@ -155,13 +155,13 @@ export default function CountryPage() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3">Supporting Documents</h4>
+                    <h4 className="font-semibold mb-3">Destekleyici Belgeler</h4>
                     <ul className="space-y-2">
                       {[
-                        "Bank statements (3-6 months)",
-                        "Flight itinerary",
-                        "Hotel reservations",
-                        "Employment certificate"
+                        "Banka hesap özetleri (3-6 ay)",
+                        "Uçak rezervasyonu",
+                        "Otel rezervasyonları",
+                        "İş belgesi"
                       ].map((doc, index) => (
                         <li key={index} className="flex items-center gap-2 text-sm">
                           <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
@@ -177,30 +177,30 @@ export default function CountryPage() {
             {/* Application Process */}
             <Card>
               <CardHeader>
-                <CardTitle>Application Process</CardTitle>
+                <CardTitle>Başvuru Süreci</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {[
                     {
                       step: "1",
-                      title: "Prepare Documents",
-                      description: "Gather all required documents according to the checklist above."
+                      title: "Belgeleri Hazırlayın",
+                      description: "Yukarıdaki kontrol listesine göre gerekli tüm belgeleri toplayın."
                     },
                     {
                       step: "2",
-                      title: "Complete Application",
-                      description: "Fill out the visa application form completely and accurately."
+                      title: "Başvuruyu Tamamlayın",
+                      description: "Vize başvuru formunu eksiksiz ve doğru bir şekilde doldurun."
                     },
                     {
                       step: "3",
-                      title: "Submit Application",
-                      description: "Submit your application to the embassy or consulate."
+                      title: "Başvuruyu Gönderin",
+                      description: "Başvurunuzu büyükelçilik veya konsolosluğa iletin."
                     },
                     {
                       step: "4",
-                      title: "Track Status",
-                      description: "Monitor your application status and wait for approval."
+                      title: "Durumu Takip Edin",
+                      description: "Başvuru durumunuzu izleyin ve onay için bekleyin."
                     }
                   ].map((item) => (
                     <div key={item.step} className="flex gap-4">
@@ -223,17 +223,17 @@ export default function CountryPage() {
             {/* Quick Actions */}
             <Card>
               <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
+                <CardTitle>Hızlı İşlemler</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full bg-visa-blue hover:bg-blue-700">
-                  Start Visa Application
+                  Vize Başvurusu Başlat
                 </Button>
                 <Button variant="outline" className="w-full">
-                  Get Expert Consultation
+                  Uzman Danışmanlığı Al
                 </Button>
                 <Button variant="outline" className="w-full">
-                  Download Document Checklist
+                  Belge Listesini İndir
                 </Button>
               </CardContent>
             </Card>
@@ -241,25 +241,25 @@ export default function CountryPage() {
             {/* Important Notes */}
             <Card>
               <CardHeader>
-                <CardTitle>Important Notes</CardTitle>
+                <CardTitle>Önemli Notlar</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                    Processing times may vary based on embassy workload
+                    İşlem süreleri büyükelçilik iş yoğunluğuna göre değişebilir
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                    Additional documents may be requested during processing
+                    İşlem sırasında ek belgeler istenebilir
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                    Visa fees are non-refundable even if application is rejected
+                    Vize ücretleri başvuru reddedilse bile iade edilmez
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                    Apply well in advance of your planned travel date
+                    Planlanan seyahat tarihinden önce başvuru yapın
                   </li>
                 </ul>
               </CardContent>
@@ -268,20 +268,20 @@ export default function CountryPage() {
             {/* Contact Support */}
             <Card>
               <CardHeader>
-                <CardTitle>Need Help?</CardTitle>
+                <CardTitle>Yardıma İhtiyacınız mı Var?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600 mb-4">
-                  Our visa experts are here to assist you with your application.
+                  Vize uzmanlarımız başvurunuzda size yardımcı olmak için burada.
                 </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
-                    <span className="font-medium">Phone:</span>
-                    <span>+1 (555) 123-4567</span>
+                    <span className="font-medium">Telefon:</span>
+                    <span>+90 (212) 123-4567</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium">Email:</span>
-                    <span>support@visaservice.com</span>
+                    <span className="font-medium">E-posta:</span>
+                    <span>info@vizehizmet.com</span>
                   </div>
                 </div>
               </CardContent>
