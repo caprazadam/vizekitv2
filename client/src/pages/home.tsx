@@ -291,15 +291,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-16 bg-white">
+      {/* AI-Powered Process */}
+      <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Nasıl Çalışır
-            </h2>
+            <div className="flex items-center justify-center mb-4">
+              <Brain className="h-8 w-8 mr-3 text-purple-600" />
+              <h2 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
+                AI Destekli Süreç
+              </h2>
+              <Sparkles className="h-8 w-8 ml-3 text-cyan-600" />
+            </div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Vizenizin hızlı ve verimli bir şekilde onaylanması için basit adımlar
+              Yapay zeka teknolojisi ile vizenizin hızlı ve akıllı bir şekilde işlenmesi
             </p>
           </div>
 
@@ -307,30 +311,35 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Vizeyi Kontrol Et",
-                description: "Hedef ülkeniz için gereksinimleri belirlemek üzere vize kontrol aracımızı kullanın."
+                icon: <Bot className="h-8 w-8" />,
+                title: "AI Vize Analizi",
+                description: "Yapay zeka ile hedef ülkeniz için gereksinimler anında analiz edilir."
               },
               {
                 step: "2",
-                title: "Belgeleri Hazırla",
-                description: "Detaylı kontrol listelerimiz ve uzman rehberliğimizle gerekli belgeleri toplayın."
+                icon: <Brain className="h-8 w-8" />,
+                title: "Akıllı Belge Rehberi",
+                description: "AI asistanı size özel belge listesi ve adım adım rehberlik sağlar."
               },
               {
                 step: "3",
-                title: "Başvuru Yap",
-                description: "Başvurunuzu gözden geçirip elçilik veya konsolosluğa sunuyoruz."
+                icon: <Zap className="h-8 w-8" />,
+                title: "Hızlı İşlem",
+                description: "Otomatik kontroller ve AI doğrulama ile başvurunuz hızla işlenir."
               },
               {
                 step: "4",
-                title: "Vize Al",
-                description: "Başvuru durumunuzu takip edin ve onaylanan vizenizi alın."
+                icon: <Sparkles className="h-8 w-8" />,
+                title: "Akıllı Takip",
+                description: "AI takip sistemi ile başvuru durumunuz anlık olarak güncellenir."
               }
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="w-20 h-20 bg-visa-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-2xl font-bold text-white">{item.step}</span>
+            ].map((item, index) => (
+              <div key={item.step} className="text-center relative">
+                <div className={`floating-animation ai-glow w-20 h-20 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 text-white`} style={{ animationDelay: `${index * 0.5}s` }}>
+                  {item.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
+                <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-r from-purple-200 to-cyan-200 rounded-full opacity-50 pulse-glow"></div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4 mt-8">{item.title}</h3>
                 <p className="text-gray-600">{item.description}</p>
               </div>
             ))}

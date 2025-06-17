@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu } from "lucide-react";
+import { Phone, Menu, Bot, Sparkles } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Navbar() {
@@ -35,15 +35,19 @@ export default function Navbar() {
   );
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <h1 className="text-2xl font-bold text-visa-blue cursor-pointer">
-                  VizeHizmet
-                </h1>
+                <div className="flex items-center cursor-pointer group">
+                  <Bot className="h-8 w-8 mr-2 text-purple-600 group-hover:text-cyan-600 transition-colors duration-300" />
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">
+                    AI VizeHizmet
+                  </h1>
+                  <Sparkles className="h-5 w-5 ml-2 text-cyan-500 opacity-70" />
+                </div>
               </Link>
             </div>
             <nav className="hidden md:ml-10 md:flex md:space-x-8">
@@ -52,12 +56,13 @@ export default function Navbar() {
           </div>
           
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-visa-blue">
+            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600 transition-colors duration-300">
               <Phone className="h-4 w-4 mr-2" />
               +90 (212) 123-4567
             </Button>
-            <Button className="bg-visa-blue hover:bg-blue-700">
-              Başla
+            <Button className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white ai-glow transition-all duration-300">
+              <Bot className="h-4 w-4 mr-2" />
+              AI Başla
             </Button>
           </div>
 
@@ -77,8 +82,9 @@ export default function Navbar() {
                       <Phone className="h-4 w-4 mr-2" />
                       +90 (212) 123-4567
                     </Button>
-                    <Button className="w-full bg-visa-blue hover:bg-blue-700">
-                      Başla
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white ai-glow">
+                      <Bot className="h-4 w-4 mr-2" />
+                      AI Başla
                     </Button>
                   </div>
                 </div>
