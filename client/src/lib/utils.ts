@@ -24,12 +24,12 @@ export function formatProcessingTime(time: string): string {
 }
 
 export function formatFee(fee: string): string {
-  // Convert USD to TL (approximate rate: 1 USD = 30 TL)
+  // Convert USD to ₺ (approximate rate: 1 USD = 30 ₺)
   if (fee.includes("$")) {
     const amount = fee.match(/\$(\d+)/);
     if (amount) {
       const tlAmount = parseInt(amount[1]) * 30;
-      return fee.replace(/From \$\d+/, `${tlAmount} TL'den başlayan`);
+      return fee.replace(/From \$\d+/, `${tlAmount}₺'den başlayan`);
     }
   }
   
