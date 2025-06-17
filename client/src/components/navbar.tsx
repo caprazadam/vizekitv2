@@ -67,27 +67,21 @@ export default function Navbar() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="relative w-10 h-10 p-0 hover:bg-purple-50"
-                  onClick={() => setIsOpen(!isOpen)}
+                  className="relative w-10 h-10 p-0 hover:bg-purple-50 rounded-lg"
                 >
                   <div className="relative w-6 h-6 flex flex-col justify-center items-center">
-                    <span className={`block h-0.5 w-6 bg-gray-600 transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-0.5' : ''}`}></span>
-                    <span className={`block h-0.5 w-6 bg-gray-600 transition-all duration-300 mt-1 ${isOpen ? 'opacity-0' : ''}`}></span>
-                    <span className={`block h-0.5 w-6 bg-gray-600 transition-all duration-300 mt-1 ${isOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
+                    <span className={`block h-0.5 w-6 bg-purple-600 transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-0.5' : ''}`}></span>
+                    <span className={`block h-0.5 w-6 bg-purple-600 transition-all duration-300 mt-1 ${isOpen ? 'opacity-0' : ''}`}></span>
+                    <span className={`block h-0.5 w-6 bg-purple-600 transition-all duration-300 mt-1 ${isOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
                   </div>
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-80 bg-gradient-to-br from-white via-purple-50/30 to-violet-50/30 border-l border-purple-200/50">
                 <div className="flex flex-col h-full">
-                  <div className="flex justify-between items-center mb-8">
+                  <div className="mb-8">
                     <h2 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
                       Menü
                     </h2>
-                    <SheetClose asChild>
-                      <Button variant="ghost" size="sm" className="w-8 h-8 p-0">
-                        <X className="h-5 w-5 text-gray-600" />
-                      </Button>
-                    </SheetClose>
                   </div>
                   
                   <nav className="flex flex-col space-y-2 flex-1">
