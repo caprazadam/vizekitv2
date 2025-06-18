@@ -6,7 +6,7 @@
 2. **public_html klasöründe "vizekit" adında klasör oluşturun**
 3. **vizekit klasörüne tüm proje dosyalarını yükleyin:**
    - dist/ klasörü (build edilmiş dosyalar)
-   - package.json
+   - hostware-package.json dosyasını package.json olarak yükleyin
    - app.js (entry point)
    - .htaccess
 

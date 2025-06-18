@@ -20,7 +20,11 @@ public_html/
 ### Adım 2: Dosya Yükleme
 1. cPanel File Manager → public_html
 2. **"vizekit" klasörü oluşturun**
-3. Tüm proje dosyalarını vizekit/ klasörüne yükleyin
+3. Şu dosyaları vizekit/ klasörüne yükleyin:
+   - dist/ klasörü (tamamıyla)
+   - hostware-package.json → package.json olarak yeniden adlandırın
+   - app.js
+   - .htaccess
 
 ### Adım 3: Node.js Selector Ayarları
 ```

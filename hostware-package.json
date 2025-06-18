@@ -1,0 +1,27 @@
+{
+  "name": "vizekit",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "VizeKit - Türk Vatandaşları için Vize Hizmetleri Platformu",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "postinstall": "echo 'VizeKit dependencies installed successfully'"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "ws": "^8.18.0",
+    "zod": "^3.24.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.453.0",
+    "tailwind-merge": "^2.6.0",
+    "memorystore": "^1.6.7"
+  }
+}
