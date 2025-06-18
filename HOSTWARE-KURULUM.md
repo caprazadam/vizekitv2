@@ -3,8 +3,8 @@
 ## Adım 1: Dosya Yükleme
 
 1. **cPanel File Manager'ı açın**
-2. **public_html klasörüne girin**
-3. **Tüm proje dosyalarını yükleyin:**
+2. **public_html klasöründe "vizekit" adında klasör oluşturun**
+3. **vizekit klasörüne tüm proje dosyalarını yükleyin:**
    - dist/ klasörü (build edilmiş dosyalar)
    - package.json
    - app.js (entry point)
@@ -13,18 +13,20 @@
 ## Adım 2: Node.js Aktivasyonu
 
 1. **cPanel → Node.js Selector'a gidin**
-2. **Ayarları yapın:**
+2. **ÇÖZÜM - Application Root ayarı:**
    - Node.js Version: 18.x veya 20.x
-   - Application Root: public_html
+   - Application Root: **vizekit** (public_html yazmayın!)
    - Application Startup File: app.js
    - Application URL: vizekit.com
+
+**ÖNEMLİ:** "public_html" yazmak yerine "vizekit" veya başka bir klasör adı kullanın. Hostware cPanel'i public_html'i doğrudan Node.js root olarak kabul etmiyor.
 
 ## Adım 3: Dependencies Kurulumu
 
 1. **cPanel Terminal'i açın**
 2. **Komutları çalıştırın:**
 ```bash
-cd public_html
+cd public_html/vizekit
 npm install --production
 ```
 
