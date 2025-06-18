@@ -110,7 +110,7 @@ export default function Navbar() {
                       className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50"
                     >
                       <Phone className="h-4 w-4 mr-3" />
-                      +90 (212) 123-4567
+                      +908503466646
                     </Button>
                   </div>
                 </div>

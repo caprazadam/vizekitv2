@@ -276,11 +276,11 @@ export default function CountryPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
                     <span className="font-medium">Telefon:</span>
-                    <span>+90 (212) 123-4567</span>
+                    <span>+908503466646</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="font-medium">E-posta:</span>
-                    <span>info@vizehizmet.com</span>
+                    <span>info@vizekit.com</span>
                   </div>
                 </div>
               </CardContent>

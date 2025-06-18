@@ -397,7 +397,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Telefon Desteği</h3>
-                    <p className="text-gray-600">+90 (212) 123-4567</p>
+                    <p className="text-gray-600">+908503466646</p>
                   </div>
                 </div>
                 <div className="flex items-center">
@@ -406,7 +406,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">E-posta Desteği</h3>
-                    <p className="text-gray-600">info@vizehizmet.com</p>
+                    <p className="text-gray-600">info@vizekit.com</p>
                   </div>
                 </div>
                 <div className="flex items-center">
