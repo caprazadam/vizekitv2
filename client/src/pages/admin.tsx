@@ -534,7 +534,7 @@ export default function Admin() {
                                         </svg>
                                       </button>
                                     </div>
-                                    ${selectedApplication.passportInfo.passportImage.includes('pdf') 
+                                    ${selectedApplication.passportInfo.passportImage?.includes('pdf') 
                                       ? `<div class="text-center p-8">
                                           <div class="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                                             <svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
