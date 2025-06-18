@@ -24,11 +24,13 @@ export default function Navbar() {
           key={item.href}
           href={item.href}
           className={`${
-            mobile ? "block px-3 py-2" : "px-3 py-2"
-          } text-sm font-medium transition-colors ${
+            mobile ? "block px-4 py-3 rounded-lg" : "px-4 py-2 rounded-lg"
+          } text-sm font-semibold transition-all duration-200 ${
             location === item.href
-              ? "text-purple-600"
-              : "text-gray-600 hover:text-purple-600"
+              ? "text-white bg-gradient-to-r from-purple-600 to-violet-600 shadow-lg"
+              : mobile 
+                ? "text-gray-700 hover:bg-purple-50 hover:text-purple-600"
+                : "text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-transparent hover:border-purple-200"
           }`}
         >
           {item.label}
@@ -38,9 +40,9 @@ export default function Navbar() {
   );
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white shadow-md border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <Link href="/">
@@ -49,16 +51,22 @@ export default function Navbar() {
                 </h1>
               </Link>
             </div>
-            <nav className="hidden md:ml-10 md:flex md:space-x-8">
-              <NavLinks />
-            </nav>
           </div>
           
-          <div className="hidden md:flex items-center">
-            <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600">
-              <Phone className="h-4 w-4 mr-2" />
-              +908503466646
-            </Button>
+          <div className="hidden md:flex items-center space-x-8">
+            <nav className="flex items-center space-x-8">
+              <NavLinks />
+            </nav>
+            <div className="border-l border-gray-200 pl-8">
+              <Button 
+                variant="outline" 
+                size="default" 
+                className="bg-gradient-to-r from-purple-600 to-violet-600 text-white border-0 hover:from-purple-700 hover:to-violet-700 font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                <Phone className="h-4 w-4 mr-2" />
+                +908503466646
+              </Button>
+            </div>
           </div>
 
           {/* Mobile menu */}
