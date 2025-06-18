@@ -94,6 +94,9 @@ switch ($path) {
     case '/admin-login':
         include 'pages/admin-login.php';
         break;
+    case '/admin-login':
+        include 'pages/admin-login.php';
+        break;
     case '/admin':
         include 'pages/admin.php';
         break;
