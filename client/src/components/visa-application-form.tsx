@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, CreditCard, FileText, User, ArrowLeft, ArrowRight, Building2, AlertCircle } from "lucide-react";
+import { CheckCircle, CreditCard, FileText, User, ArrowLeft, ArrowRight, Building2, AlertCircle, Upload, X, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Country } from "@shared/schema";
 
@@ -34,6 +34,7 @@ interface PassportInfo {
   issueDate: string;
   expiryDate: string;
   placeOfIssue: string;
+  passportImage?: string;
 }
 
 interface PaymentInfo {
@@ -67,7 +68,9 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
     issueDate: "",
     expiryDate: "",
     placeOfIssue: "",
+    passportImage: "",
   });
+  const [passportImagePreview, setPassportImagePreview] = useState<string | null>(null);
 
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>({
     cardNumber: "",
@@ -95,7 +98,48 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
     if (!passportInfo.issueDate) missing.push("Veriliş Tarihi");
     if (!passportInfo.expiryDate) missing.push("Son Geçerlilik Tarihi");
     if (!passportInfo.placeOfIssue) missing.push("Veriliş Yeri");
+    if (!passportInfo.passportImage) missing.push("Pasaport Görseli");
     return missing;
+  };
+
+  const handlePassportImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+      toast({
+        title: "Geçersiz Dosya Türü",
+        description: "Lütfen JPG, PNG veya PDF formatında dosya yükleyin",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast({
+        title: "Dosya Çok Büyük",
+        description: "Dosya boyutu 5MB'dan küçük olmalıdır",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64String = e.target?.result as string;
+      setPassportInfo(prev => ({ ...prev, passportImage: base64String }));
+      setPassportImagePreview(base64String);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removePassportImage = () => {
+    setPassportInfo(prev => ({ ...prev, passportImage: "" }));
+    setPassportImagePreview(null);
   };
 
   const validatePaymentInfo = () => {
@@ -415,11 +459,121 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 />
               </div>
 
+              {/* Passport Image Upload */}
+              <div>
+                <Label htmlFor="passportImage" className="text-base font-medium mb-3 block">
+                  Pasaport Görseli *
+                </Label>
+                <div className="space-y-4">
+                  {!passportImagePreview ? (
+                    <div className="border-2 border-dashed border-purple-300 rounded-lg p-8 text-center hover:border-purple-400 transition-colors">
+                      <input
+                        id="passportImage"
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png,application/pdf"
+                        onChange={handlePassportImageUpload}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor="passportImage"
+                        className="cursor-pointer flex flex-col items-center space-y-3"
+                      >
+                        <div className="bg-purple-100 p-3 rounded-full">
+                          <Upload className="h-8 w-8 text-purple-600" />
+                        </div>
+                        <div>
+                          <p className="text-lg font-medium text-gray-700">Pasaport dosyasını yükleyin</p>
+                          <p className="text-sm text-gray-500 mt-1">
+                            JPG, PNG veya PDF formatında, maksimum 5MB
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="mt-3 border-purple-300 text-purple-700 hover:bg-purple-50"
+                        >
+                          <Upload className="h-4 w-4 mr-2" />
+                          Dosya Seç
+                        </Button>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="bg-green-100 p-2 rounded-full">
+                            <CheckCircle className="h-5 w-5 text-green-600" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-green-800">Pasaport dosyası yüklendi</p>
+                            <p className="text-sm text-green-600">
+                              {passportImagePreview.includes('pdf') ? 'PDF Belgesi' : 'Görsel Dosyası'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {!passportImagePreview.includes('pdf') && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                const modal = document.createElement('div');
+                                modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4';
+                                modal.innerHTML = `
+                                  <div class="bg-white rounded-lg p-4 max-w-4xl max-h-[90vh] overflow-auto">
+                                    <div class="flex justify-between items-center mb-4">
+                                      <h3 class="text-lg font-semibold">Pasaport Önizleme</h3>
+                                      <button class="text-gray-500 hover:text-gray-700" onclick="this.closest('.fixed').remove()">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                    <img src="${passportImagePreview}" class="w-full h-auto rounded-lg" alt="Pasaport Önizleme" />
+                                  </div>
+                                `;
+                                document.body.appendChild(modal);
+                              }}
+                              className="border-blue-300 text-blue-700 hover:bg-blue-50"
+                            >
+                              <Eye className="h-4 w-4 mr-1" />
+                              Önizle
+                            </Button>
+                          )}
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={removePassportImage}
+                            className="border-red-300 text-red-700 hover:bg-red-50"
+                          >
+                            <X className="h-4 w-4 mr-1" />
+                            Kaldır
+                          </Button>
+                        </div>
+                      </div>
+                      {!passportImagePreview.includes('pdf') && (
+                        <div className="mt-3">
+                          <img
+                            src={passportImagePreview}
+                            alt="Pasaport Önizleme"
+                            className="w-32 h-20 object-cover rounded border"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-200/50 shadow-sm">
-                <h5 className="font-semibold text-blue-900 mb-3 text-lg">Önemli Not</h5>
-                <p className="text-base text-blue-700">
-                  Pasaportunuzun vize başvurusu tarihinden itibaren en az 6 ay geçerli olması gerekmektedir.
-                </p>
+                <h5 className="font-semibold text-blue-900 mb-3 text-lg">Önemli Notlar</h5>
+                <ul className="text-base text-blue-700 space-y-2">
+                  <li>• Pasaportunuzun vize başvurusu tarihinden itibaren en az 6 ay geçerli olması gerekmektedir</li>
+                  <li>• Pasaport görseliniz net ve okunabilir olmalıdır</li>
+                  <li>• Kabul edilen formatlar: JPG, PNG, PDF (maksimum 5MB)</li>
+                </ul>
               </div>
             </div>
           )}

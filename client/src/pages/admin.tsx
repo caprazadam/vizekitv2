@@ -19,7 +19,9 @@ import {
   TrendingUp,
   DollarSign,
   LogOut,
-  Shield
+  Shield,
+  FileImage,
+  Download
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatFee } from "@/lib/utils";
@@ -44,6 +46,7 @@ interface ApplicationData {
     issueDate: string;
     expiryDate: string;
     placeOfIssue: string;
+    passportImage?: string;
   };
   paymentMethod?: string;
   status: string;
@@ -392,10 +395,18 @@ export default function Admin() {
                       </div>
                       
                       <div className="flex justify-between items-center text-sm text-gray-600">
-                        <span className="flex items-center">
-                          <MapPin className="h-3 w-3 mr-1" />
-                          {application.country}
-                        </span>
+                        <div className="flex items-center space-x-3">
+                          <span className="flex items-center">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {application.country}
+                          </span>
+                          {application.passportInfo.passportImage && (
+                            <span className="flex items-center text-green-600">
+                              <FileImage className="h-3 w-3 mr-1" />
+                              Belge Var
+                            </span>
+                          )}
+                        </div>
                         <span className="flex items-center">
                           <Calendar className="h-3 w-3 mr-1" />
                           {new Date(application.submissionDate).toLocaleDateString('tr-TR')}
@@ -503,6 +514,80 @@ export default function Admin() {
                         <span className="text-gray-600">Veriliş Yeri:</span>
                         <span>{selectedApplication.passportInfo.placeOfIssue}</span>
                       </div>
+                      {selectedApplication.passportInfo.passportImage && (
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-600">Pasaport Görseli:</span>
+                          <div className="flex items-center space-x-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                const modal = document.createElement('div');
+                                modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4';
+                                modal.innerHTML = `
+                                  <div class="bg-white rounded-lg p-6 max-w-4xl max-h-[90vh] overflow-auto">
+                                    <div class="flex justify-between items-center mb-4">
+                                      <h3 class="text-xl font-semibold">Pasaport Belgesi - ${selectedApplication.applicationNumber}</h3>
+                                      <button class="text-gray-500 hover:text-gray-700 p-2" onclick="this.closest('.fixed').remove()">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                    ${selectedApplication.passportInfo.passportImage.includes('pdf') 
+                                      ? `<div class="text-center p-8">
+                                          <div class="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                            <svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 1H7a2 2 0 00-2 2v16a2 2 0 002 2z" />
+                                            </svg>
+                                          </div>
+                                          <p class="text-lg font-medium text-gray-800 mb-2">PDF Belgesi</p>
+                                          <p class="text-gray-600 mb-4">PDF dosyaları tarayıcıda görüntülenemez</p>
+                                          <a href="${selectedApplication.passportInfo.passportImage}" download="pasaport-${selectedApplication.applicationNumber}.pdf" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                                            <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                            </svg>
+                                            PDF İndir
+                                          </a>
+                                        </div>`
+                                      : `<div class="text-center">
+                                          <img src="${selectedApplication.passportInfo.passportImage}" class="w-full h-auto rounded-lg shadow-lg max-w-2xl mx-auto" alt="Pasaport Belgesi" />
+                                          <div class="mt-4">
+                                            <a href="${selectedApplication.passportInfo.passportImage}" download="pasaport-${selectedApplication.applicationNumber}.jpg" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                                              <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                              </svg>
+                                              Görseli İndir
+                                            </a>
+                                          </div>
+                                        </div>`
+                                    }
+                                  </div>
+                                `;
+                                document.body.appendChild(modal);
+                              }}
+                              className="border-blue-300 text-blue-700 hover:bg-blue-50"
+                            >
+                              <Eye className="h-4 w-4 mr-1" />
+                              Görüntüle
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                const link = document.createElement('a');
+                                link.href = selectedApplication.passportInfo.passportImage!;
+                                link.download = `pasaport-${selectedApplication.applicationNumber}${selectedApplication.passportInfo.passportImage!.includes('pdf') ? '.pdf' : '.jpg'}`;
+                                link.click();
+                              }}
+                              className="border-green-300 text-green-700 hover:bg-green-50"
+                            >
+                              <Download className="h-4 w-4 mr-1" />
+                              İndir
+                            </Button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
