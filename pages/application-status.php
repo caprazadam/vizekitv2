@@ -4,198 +4,538 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Başvuru Sorgula - VizeKit</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta name="description" content="Vize başvuru durumunuzu sorgulayın. Başvuru numaranızla anlık durum takibi yapın.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/vizekit-theme.css" rel="stylesheet">
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .page-header {
+            padding: 150px 0 80px;
+            text-align: center;
+        }
+
+        .search-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .status-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .status-pending {
+            background: linear-gradient(45deg, #ffa500, rgba(255, 165, 0, 0.3));
+            color: white;
+        }
+
+        .status-processing {
+            background: linear-gradient(45deg, var(--neon-blue), rgba(0, 212, 255, 0.3));
+            color: var(--dark-bg);
+        }
+
+        .status-approved {
+            background: linear-gradient(45deg, var(--neon-green), rgba(0, 255, 136, 0.3));
+            color: var(--dark-bg);
+        }
+
+        .status-rejected {
+            background: linear-gradient(45deg, #ff6b6b, rgba(255, 107, 107, 0.3));
+            color: white;
+        }
+
+        .status-completed {
+            background: linear-gradient(45deg, var(--primary-purple), rgba(111, 66, 193, 0.3));
+            color: white;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-green), var(--neon-blue));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--neon-green);
+        }
+
+        .timeline-item.active::before {
+            background: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .timeline-item.pending::before {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 0 0.25rem rgba(0, 255, 136, 0.25);
+            color: white;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: normal;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--neon-green);
+        }
+
+        .document-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .document-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .document-list li::before {
+            content: '\f15b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+
+        .result-container {
+            display: none;
+        }
+
+        .no-result {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
+    <div class="animated-bg"></div>
     
     <!-- Navigation -->
-    <nav class="gradient-bg shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center">
-                    <a href="/"><h1 class="text-2xl font-bold text-white">VizeKit</h1></a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-white hover:text-purple-200 transition">Ana Sayfa</a>
-                    <a href="/visa-checker" class="text-white hover:text-purple-200 transition">Vize Kontrol</a>
-                    <a href="/countries" class="text-white hover:text-purple-200 transition">Ülkeler</a>
-                    <a href="/services" class="text-white hover:text-purple-200 transition">Hizmetler</a>
-                    <a href="/contact" class="text-white hover:text-purple-200 transition">İletişim</a>
-                    <a href="/application-status" class="text-purple-200 font-semibold">Başvuru Sorgula</a>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-passport me-2"></i>VizeKit
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/visa-checker">Vize Kontrol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/countries">Ülkeler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Hizmetler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">İletişim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/application-status">Başvuru Sorgula</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">Başvuru Durumu Sorgula</h1>
-            <p class="text-gray-600">Vize başvuru durumunuzu takip edin</p>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Başvuru Sorgula</h1>
+            <p class="hero-subtitle">Vize başvuru durumunuzu anlık olarak takip edin</p>
         </div>
+    </section>
 
-        <div class="bg-white rounded-xl shadow-lg p-8">
-            <form id="statusForm" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Başvuru Numarası</label>
-                    <input type="text" name="application_number" placeholder="VK-2025-001" 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
-                    <p class="text-sm text-gray-500 mt-1">Başvuru sırasında verilen referans numarası</p>
-                </div>
+    <!-- Search Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="search-card">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-search" style="font-size: 3rem; color: var(--neon-green); margin-bottom: 1rem;"></i>
+                            <h3>Başvuru Numaranızı Girin</h3>
+                            <p class="text-muted">Başvuru numaranız VK-2025-XXX formatında olmalıdır</p>
+                        </div>
+                        
+                        <form id="searchForm" class="mb-4">
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <input type="text" id="applicationNumber" class="form-control search-input" 
+                                           placeholder="VK-2025-001" pattern="VK-[0-9]{4}-[0-9]{3}" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn-neon w-100">
+                                        <i class="fas fa-search me-2"></i>Sorgula
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">E-posta Adresi</label>
-                    <input type="email" name="email" placeholder="ornek@email.com"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" required>
-                    <p class="text-sm text-gray-500 mt-1">Başvuru sırasında kullandığınız e-posta</p>
-                </div>
-
-                <button type="submit" class="w-full gradient-bg text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition">
-                    Durumu Sorgula
-                </button>
-            </form>
-
-            <div id="result" class="mt-8 hidden">
-                <!-- Results will be displayed here -->
-            </div>
-        </div>
-
-        <!-- Help Section -->
-        <div class="mt-12 bg-purple-50 rounded-xl p-8 border border-purple-200">
-            <h2 class="text-2xl font-bold text-purple-900 mb-6">Yardım ve Bilgilendirme</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <h3 class="font-semibold text-purple-900 mb-3">Başvuru Numarası Nerede?</h3>
-                    <ul class="space-y-2 text-purple-700">
-                        <li>• Başvuru tamamlandıktan sonra gönderilen e-postada</li>
-                        <li>• SMS ile gönderilen onay mesajında</li>
-                        <li>• VK-YYYY-XXX formatında (örn: VK-2025-001)</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-purple-900 mb-3">Başvuru Durumları</h3>
-                    <ul class="space-y-2 text-purple-700">
-                        <li>• <span class="text-yellow-600">Beklemede:</span> İnceleme aşamasında</li>
-                        <li>• <span class="text-blue-600">İşlemde:</span> Konsolosluğa iletildi</li>
-                        <li>• <span class="text-green-600">Onaylandı:</span> Vize onaylandı</li>
-                        <li>• <span class="text-red-600">Reddedildi:</span> Başvuru reddedildi</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="mt-6 pt-6 border-t border-purple-200">
-                <h3 class="font-semibold text-purple-900 mb-3">Sorun mu yaşıyorsunuz?</h3>
-                <div class="flex flex-wrap gap-4">
-                    <a href="/contact" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-                        İletişime Geç
-                    </a>
-                    <a href="https://wa.me/908503466646" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">
-                        WhatsApp Destek
-                    </a>
-                    <a href="tel:+908503466646" class="border border-purple-600 text-purple-600 px-6 py-2 rounded-lg hover:bg-purple-50 transition">
-                        Telefon: +908503466646
-                    </a>
+                        <div class="text-center">
+                            <small class="text-muted">
+                                Başvuru numaranızı hatırlamıyor musunuz? 
+                                <a href="/contact" class="text-white">İletişime geçin</a>
+                            </small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Results Section -->
+    <section class="py-5">
+        <div class="container">
+            <div id="resultContainer" class="result-container">
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="status-card">
+                            <div class="d-flex justify-content-between align-items-start mb-4">
+                                <div>
+                                    <h4 id="applicationNumberResult" class="mb-2"></h4>
+                                    <p class="text-muted mb-0" id="countryResult"></p>
+                                </div>
+                                <span id="statusBadge" class="status-badge"></span>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Başvuran:</span>
+                                        <span id="applicantName"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">E-posta:</span>
+                                        <span id="applicantEmail"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Telefon:</span>
+                                        <span id="applicantPhone"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <span class="info-label">Başvuru Tarihi:</span>
+                                        <span id="applicationDate"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Tahmini Teslim:</span>
+                                        <span id="estimatedDate"></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Ücret:</span>
+                                        <span id="feeAmount"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="notesSection" style="display: none;">
+                                <h5 class="mb-3" style="color: var(--neon-blue);">
+                                    <i class="fas fa-sticky-note me-2"></i>Notlar
+                                </h5>
+                                <p id="applicationNotes" class="mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="status-card">
+                            <h5 class="mb-4" style="color: var(--neon-green);">
+                                <i class="fas fa-clock me-2"></i>Süreç Takibi
+                            </h5>
+                            <div class="timeline">
+                                <div class="timeline-item active">
+                                    <h6>Başvuru Alındı</h6>
+                                    <small class="text-muted">Başvurunuz sistem tarafından alındı</small>
+                                </div>
+                                <div class="timeline-item active" id="processingStep">
+                                    <h6>İnceleme Aşaması</h6>
+                                    <small class="text-muted">Belgeleriniz inceleniyor</small>
+                                </div>
+                                <div class="timeline-item pending" id="approvalStep">
+                                    <h6>Onay Aşaması</h6>
+                                    <small class="text-muted">Son kontroller yapılıyor</small>
+                                </div>
+                                <div class="timeline-item pending" id="completedStep">
+                                    <h6>Tamamlandı</h6>
+                                    <small class="text-muted">Vize işleminiz tamamlandı</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Result -->
+            <div id="noResult" class="result-container">
+                <div class="glass-card">
+                    <div class="no-result">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: var(--neon-blue); margin-bottom: 1rem;"></i>
+                        <h4>Başvuru Bulunamadı</h4>
+                        <p>Girdiğiniz başvuru numarası sistemimizde bulunamadı. Lütfen numarayı kontrol ederek tekrar deneyin.</p>
+                        <a href="/contact" class="btn-outline-neon">
+                            <i class="fas fa-envelope me-2"></i>Destek Al
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-clock mb-3" style="font-size: 2rem; color: var(--neon-green);"></i>
+                        <h5>Anlık Takip</h5>
+                        <p>Başvuru durumunuzu 7/24 anlık olarak takip edebilirsiniz</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-bell mb-3" style="font-size: 2rem; color: var(--neon-blue);"></i>
+                        <h5>SMS Bildirimleri</h5>
+                        <p>Durum değişikliklerinde otomatik SMS bilgilendirmesi</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-headset mb-3" style="font-size: 2rem; color: var(--primary-purple);"></i>
+                        <h5>Destek</h5>
+                        <p>Herhangi bir sorunuz için 7/24 canlı destek hizmeti</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.getElementById('statusForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        const applicationNumber = formData.get('application_number');
-        const email = formData.get('email');
-        const result = document.getElementById('result');
-        
-        // Show loading
-        result.className = 'mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg';
-        result.innerHTML = '<div class="flex items-center"><div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mr-3"></div>Sorgulanıyor...</div>';
-        
-        // Simulate API call
-        setTimeout(() => {
-            // Sample application data
-            const applications = {
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const applicationNumber = document.getElementById('applicationNumber').value.trim();
+            const resultContainer = document.getElementById('resultContainer');
+            const noResult = document.getElementById('noResult');
+            
+            // Hide previous results
+            resultContainer.style.display = 'none';
+            noResult.style.display = 'none';
+            
+            // Mock data for demonstration
+            const mockApplications = {
                 'VK-2025-001': {
-                    status: 'Beklemede',
-                    country: 'Amerika Birleşik Devletleri',
-                    date: '2025-06-15',
-                    name: 'Ahmet Yılmaz',
+                    applicantName: 'Ahmet Yılmaz',
+                    email: 'ahmet@email.com',
+                    phone: '+90 555 123 45 67',
+                    country: '🇺🇸 Amerika Birleşik Devletleri',
                     purpose: 'Turizm',
-                    estimatedDate: '2025-06-25',
-                    documents: ['Pasaport fotokopisi', 'Fotoğraf', 'Mali belge']
+                    status: 'pending',
+                    statusText: 'Beklemede',
+                    applicationDate: '15 Haziran 2025',
+                    estimatedDate: '30 Haziran 2025',
+                    fee: '$160',
+                    notes: 'Belgeleriniz inceleme aşamasında. Ek belge talep edilebilir.'
                 },
                 'VK-2025-002': {
-                    status: 'Onaylandı',
-                    country: 'Almanya',
-                    date: '2025-06-14',
-                    name: 'Fatma Kaya',
+                    applicantName: 'Fatma Kaya',
+                    email: 'fatma@email.com',
+                    phone: '+90 555 987 65 43',
+                    country: '🇩🇪 Almanya',
                     purpose: 'İş',
-                    estimatedDate: '2025-06-20',
-                    documents: ['Tüm belgeler tamamlandı']
+                    status: 'approved',
+                    statusText: 'Onaylandı',
+                    applicationDate: '14 Haziran 2025',
+                    estimatedDate: '25 Haziran 2025',
+                    fee: 'Ücretsiz',
+                    notes: 'Vize başvurunuz onaylandı. Pasaportunuzu teslim alabilirsiniz.'
                 },
                 'VK-2025-003': {
-                    status: 'Reddedildi',
-                    country: 'İngiltere',
-                    date: '2025-06-13',
-                    name: 'Mehmet Demir',
+                    applicantName: 'Mehmet Demir',
+                    email: 'mehmet@email.com',
+                    phone: '+90 555 111 11 11',
+                    country: '🇬🇧 İngiltere',
                     purpose: 'Eğitim',
-                    estimatedDate: '',
-                    documents: ['Eksik belgeler mevcut']
+                    status: 'processing',
+                    statusText: 'İşleniyor',
+                    applicationDate: '13 Haziran 2025',
+                    estimatedDate: '28 Haziran 2025',
+                    fee: '£95',
+                    notes: 'Başvurunuz konsolosluk tarafından değerlendiriliyor.'
                 }
             };
             
-            const application = applications[applicationNumber.toUpperCase()];
+            const application = mockApplications[applicationNumber];
             
             if (application) {
-                const statusColors = {
-                    'Beklemede': 'bg-yellow-100 border-yellow-400 text-yellow-800',
-                    'İşlemde': 'bg-blue-100 border-blue-400 text-blue-800',
-                    'Onaylandı': 'bg-green-100 border-green-400 text-green-800',
-                    'Reddedildi': 'bg-red-100 border-red-400 text-red-800'
-                };
-                
-                result.className = `mt-8 p-6 ${statusColors[application.status]} border rounded-lg`;
-                result.innerHTML = `
-                    <div class="mb-4">
-                        <h3 class="text-xl font-bold mb-2">Başvuru Durumu: ${application.status}</h3>
-                        <div class="grid md:grid-cols-2 gap-4 text-sm">
-                            <div><strong>Başvuru No:</strong> ${applicationNumber.toUpperCase()}</div>
-                            <div><strong>Başvuran:</strong> ${application.name}</div>
-                            <div><strong>Ülke:</strong> ${application.country}</div>
-                            <div><strong>Amaç:</strong> ${application.purpose}</div>
-                            <div><strong>Başvuru Tarihi:</strong> ${application.date}</div>
-                            ${application.estimatedDate ? `<div><strong>Tahmini Sonuç:</strong> ${application.estimatedDate}</div>` : ''}
-                        </div>
-                    </div>
-                    <div class="border-t pt-4">
-                        <h4 class="font-semibold mb-2">Belgeler:</h4>
-                        <ul class="list-disc list-inside text-sm">
-                            ${application.documents.map(doc => `<li>${doc}</li>`).join('')}
-                        </ul>
-                    </div>
-                    ${application.status === 'Onaylandı' ? `
-                        <div class="mt-4 p-3 bg-white rounded border">
-                            <p class="text-sm font-medium">Vizene hazır! Pasaportunuzu almak için randevu alabilirsiniz.</p>
-                        </div>
-                    ` : ''}
-                `;
+                // Show result
+                showApplicationResult(application, applicationNumber);
+                resultContainer.style.display = 'block';
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
             } else {
-                result.className = 'mt-8 p-6 bg-red-50 border border-red-200 rounded-lg';
-                result.innerHTML = `
-                    <h3 class="text-lg font-semibold text-red-800 mb-2">Başvuru Bulunamadı</h3>
-                    <p class="text-red-700">Girdiğiniz başvuru numarası veya e-posta adresi ile eşleşen bir başvuru bulunamadı.</p>
-                    <div class="mt-4">
-                        <p class="text-sm text-red-600">Lütfen bilgilerinizi kontrol edin veya bizimle iletişime geçin.</p>
-                    </div>
-                `;
+                // Show no result
+                noResult.style.display = 'block';
+                noResult.scrollIntoView({ behavior: 'smooth' });
             }
-        }, 1500);
-    });
+        });
+        
+        function showApplicationResult(app, number) {
+            document.getElementById('applicationNumberResult').textContent = number;
+            document.getElementById('countryResult').textContent = app.country + ' - ' + app.purpose;
+            document.getElementById('applicantName').textContent = app.applicantName;
+            document.getElementById('applicantEmail').textContent = app.email;
+            document.getElementById('applicantPhone').textContent = app.phone;
+            document.getElementById('applicationDate').textContent = app.applicationDate;
+            document.getElementById('estimatedDate').textContent = app.estimatedDate;
+            document.getElementById('feeAmount').textContent = app.fee;
+            
+            // Status badge
+            const statusBadge = document.getElementById('statusBadge');
+            statusBadge.textContent = app.statusText;
+            statusBadge.className = `status-badge status-${app.status}`;
+            
+            // Notes
+            if (app.notes) {
+                document.getElementById('applicationNotes').textContent = app.notes;
+                document.getElementById('notesSection').style.display = 'block';
+            }
+            
+            // Update timeline
+            updateTimeline(app.status);
+        }
+        
+        function updateTimeline(status) {
+            const steps = ['processingStep', 'approvalStep', 'completedStep'];
+            
+            // Reset all steps
+            steps.forEach(stepId => {
+                const step = document.getElementById(stepId);
+                step.classList.remove('active');
+                step.classList.add('pending');
+            });
+            
+            // Activate steps based on status
+            if (status === 'processing' || status === 'approved' || status === 'completed') {
+                document.getElementById('processingStep').classList.add('active');
+                document.getElementById('processingStep').classList.remove('pending');
+            }
+            
+            if (status === 'approved' || status === 'completed') {
+                document.getElementById('approvalStep').classList.add('active');
+                document.getElementById('approvalStep').classList.remove('pending');
+            }
+            
+            if (status === 'completed') {
+                document.getElementById('completedStep').classList.add('active');
+                document.getElementById('completedStep').classList.remove('pending');
+            }
+        }
+        
+        // Auto-format application number input
+        document.getElementById('applicationNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9VK-]/g, '');
+            
+            if (!value.startsWith('VK-')) {
+                value = 'VK-' + value.replace('VK-', '');
+            }
+            
+            // Format: VK-YYYY-XXX
+            if (value.length > 3) {
+                const parts = value.substring(3);
+                if (parts.length <= 4) {
+                    value = 'VK-' + parts;
+                } else {
+                    value = 'VK-' + parts.substring(0, 4) + '-' + parts.substring(4, 7);
+                }
+            }
+            
+            e.target.value = value.toUpperCase();
+        });
     </script>
-
 </body>
 </html>
