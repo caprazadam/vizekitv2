@@ -6,8 +6,7 @@
   "description": "VizeKit - Türk Vatandaşları için Vize Hizmetleri Platformu",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "postinstall": "echo 'VizeKit runtime dependencies installed successfully'"
+    "start": "node app.js"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -15,9 +14,6 @@
   "dependencies": {
     "express": "^4.21.2",
     "express-session": "^1.18.1",
-    "memorystore": "^1.6.7",
-    "ws": "^8.18.0",
-    "zod": "^3.24.2",
-    "zod-validation-error": "^3.4.0"
+    "memorystore": "^1.6.7"
   }
 }
