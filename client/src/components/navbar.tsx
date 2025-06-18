@@ -45,7 +45,7 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <Link href="/">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent cursor-pointer">
-                  VizeHizmet
+                  VizeKit
                 </h1>
               </Link>
             </div>
@@ -57,7 +57,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             <Button variant="ghost" size="sm" className="text-gray-600 hover:text-purple-600">
               <Phone className="h-4 w-4 mr-2" />
-              +90 (212) 123-4567
+              +908503466646
             </Button>
           </div>
 

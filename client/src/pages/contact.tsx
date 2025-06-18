@@ -81,26 +81,26 @@ export default function Contact() {
               {
                 icon: <Phone className="h-8 w-8" />,
                 title: "Telefon",
-                info: "+90 (212) 123-4567",
+                info: "+908503466646",
                 description: "7/24 destek hattı"
               },
               {
                 icon: <Mail className="h-8 w-8" />,
                 title: "E-posta",
-                info: "info@vizehizmet.com",
+                info: "info@vizekit.com",
                 description: "Sorularınız için"
               },
               {
                 icon: <MapPin className="h-8 w-8" />,
                 title: "Adres",
-                info: "Levent Mahallesi, Büyükdere Cad. No:123",
-                description: "İstanbul, Türkiye"
+                info: "Sakarya Mah. 57015. SK. No: 25",
+                description: "Kahramanmaraş, Türkiye"
               },
               {
-                icon: <Clock className="h-8 w-8" />,
-                title: "Çalışma Saatleri",
-                info: "Pzt-Cum: 09:00-18:00",
-                description: "Hafta sonu randevu ile"
+                icon: <MessageCircle className="h-8 w-8" />,
+                title: "WhatsApp",
+                info: "+908503466646",
+                description: "Hızlı iletişim"
               }
             ].map((contact, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
@@ -260,65 +260,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Office Locations */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Ofis Lokasyonlarımız
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Size en yakın ofisimizden hizmet alabilirsiniz
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                city: "İstanbul - Levent",
-                address: "Büyükdere Cad. No:123, Levent",
-                phone: "+90 (212) 123-4567",
-                hours: "Pzt-Cum: 09:00-18:00"
-              },
-              {
-                city: "Ankara - Çankaya",
-                address: "Atatürk Bulvarı No:456, Çankaya",
-                phone: "+90 (312) 123-4567",
-                hours: "Pzt-Cum: 09:00-18:00"
-              },
-              {
-                city: "İzmir - Alsancak",
-                address: "Cumhuriyet Cad. No:789, Alsancak",
-                phone: "+90 (232) 123-4567",
-                hours: "Pzt-Cum: 09:00-18:00"
-              }
-            ].map((office, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{office.city}</h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start">
-                      <MapPin className="h-4 w-4 text-visa-blue mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-gray-600">{office.address}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Phone className="h-4 w-4 text-visa-blue mr-2 flex-shrink-0" />
-                      <span className="text-gray-600">{office.phone}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 text-visa-blue mr-2 flex-shrink-0" />
-                      <span className="text-gray-600">{office.hours}</span>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="w-full mt-4 border-visa-blue text-visa-blue hover:bg-visa-blue hover:text-white">
-                    Randevu Al
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
