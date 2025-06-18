@@ -1,0 +1,20 @@
+# Security for uploads directory
+Options -Indexes
+
+# Allow only specific file types
+<FilesMatch "\.(jpg|jpeg|png|pdf)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Deny all other files
+<FilesMatch ".*">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block PHP execution
+<Files "*.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
