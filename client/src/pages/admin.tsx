@@ -17,10 +17,13 @@ import {
   Edit,
   Users,
   TrendingUp,
-  DollarSign
+  DollarSign,
+  LogOut,
+  Shield
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatFee } from "@/lib/utils";
+import { useLocation } from "wouter";
 
 interface ApplicationData {
   applicationNumber: string;
@@ -55,15 +58,53 @@ export default function Admin() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedApplication, setSelectedApplication] = useState<ApplicationData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
-    loadApplications();
+    checkAuthentication();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadApplications();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     filterApplications();
   }, [applications, searchTerm, statusFilter]);
+
+  const checkAuthentication = () => {
+    const isAuth = localStorage.getItem('admin-authenticated');
+    const loginTime = localStorage.getItem('admin-login-time');
+    
+    if (isAuth === 'true' && loginTime) {
+      const timeDiff = Date.now() - parseInt(loginTime);
+      const hoursPassed = timeDiff / (1000 * 60 * 60);
+      
+      // Session expires after 8 hours
+      if (hoursPassed < 8) {
+        setIsAuthenticated(true);
+      } else {
+        handleLogout();
+      }
+    } else {
+      setLocation('/admin-login');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('admin-authenticated');
+    localStorage.removeItem('admin-login-time');
+    setIsAuthenticated(false);
+    toast({
+      title: "Oturum Sonlandırıldı",
+      description: "Güvenli bir şekilde çıkış yaptınız",
+    });
+    setLocation('/admin-login');
+  };
 
   const loadApplications = () => {
     setIsLoading(true);
@@ -170,16 +211,37 @@ export default function Admin() {
 
   const stats = getStatistics();
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/30 to-violet-50/30 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600">Yetkilendirme kontrol ediliyor...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/30 to-violet-50/30 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent mb-4">
-            Yönetici Paneli
-          </h1>
-          <p className="text-xl text-gray-600">
-            Vize başvurularını yönetin ve takip edin
-          </p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent mb-4">
+              Yönetici Paneli
+            </h1>
+            <p className="text-xl text-gray-600">
+              Vize başvurularını yönetin ve takip edin
+            </p>
+          </div>
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="flex items-center space-x-2 px-6 py-3 border-red-300 text-red-700 hover:bg-red-50 hover:border-red-400"
+          >
+            <LogOut className="h-5 w-5" />
+            <span>Çıkış Yap</span>
+          </Button>
         </div>
 
         {/* Statistics Cards */}
