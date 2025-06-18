@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+// Load configuration
+$config = include 'config/env.php';
+
+// Database connection
+require_once 'config/database.php';
+$database = new Database();
+$pdo = $database->getConnection();
+
 // Country data
 $countries = [
     ['name' => 'Amerika Birleşik Devletleri', 'code' => 'US', 'flag' => '🇺🇸'],
