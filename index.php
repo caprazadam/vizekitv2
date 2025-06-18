@@ -1,23 +1,6 @@
 <?php
 session_start();
 
-// VizeKit - Türk Vatandaşları için Vize Hizmetleri
-// vizekit.com
-
-// Database configuration
-$db_host = 'localhost';
-$db_name = 'vizekit_db';
-$db_user = 'root';
-$db_pass = '';
-
-try {
-    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    // Development mode - production'da bu bilgiyi gizleyin
-    $pdo = null; // Memory storage mode
-}
-
 // Country data
 $countries = [
     ['name' => 'Amerika Birleşik Devletleri', 'code' => 'US', 'flag' => '🇺🇸'],
