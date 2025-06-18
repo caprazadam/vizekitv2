@@ -1,4 +1,4 @@
-// Hostware Node.js Entry Point for VizeKit
+// VizeKit Node.js Entry Point for vizekit.com
 const { spawn } = require('child_process');
 const path = require('path');
 
