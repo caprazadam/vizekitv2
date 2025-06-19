@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, CreditCard, FileText, User, ArrowLeft, ArrowRight, Building2, AlertCircle, Upload, X, Eye } from "lucide-react";
+import { CheckCircle, CreditCard, FileText, User, ArrowLeft, ArrowRight, Building2, AlertCircle, Upload, X, Eye, Shield, Globe, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Country } from "@shared/schema";
 
@@ -594,27 +594,52 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
               </div>
 
               {/* Payment Method Selection */}
-              <div className="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-xl border border-purple-200/50 shadow-sm">
-                <h5 className="font-semibold text-purple-900 mb-4 text-lg">Ödeme Yöntemi Seçin</h5>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-lg">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full mb-4">
+                    <CheckCircle className="h-8 w-8 text-white" />
+                  </div>
+                  <h5 className="text-2xl font-bold text-gray-900 mb-2">Güvenli Ödeme Yöntemleri</h5>
+                  <p className="text-gray-600">256-bit SSL şifrelemesi ile korunan ödeme seçenekleri</p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* PayTR Option */}
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('paytr')}
-                    className={`p-4 rounded-lg border-2 transition-all ${
+                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
                       paymentMethod === 'paytr'
-                        ? 'border-blue-500 bg-blue-50 shadow-md'
-                        : 'border-gray-200 bg-white hover:border-blue-300'
+                        ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-cyan-50 shadow-xl shadow-blue-100'
+                        : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-lg'
                     }`}
                   >
+                    <div className="absolute top-4 right-4">
+                      {paymentMethod === 'paytr' && (
+                        <div className="bg-blue-500 text-white rounded-full p-1">
+                          <CheckCircle className="h-4 w-4" />
+                        </div>
+                      )}
+                    </div>
+                    
                     <div className="text-center">
-                      <div className="bg-white p-2 rounded-lg shadow-sm border mb-3 mx-auto w-fit">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <CreditCard className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="bg-white px-4 py-2 rounded-full shadow-sm border mb-4 mx-auto w-fit">
                         <div className="text-lg font-bold text-blue-600">PayTR</div>
                       </div>
-                      <h6 className="font-semibold text-gray-800 mb-2">Kredi Kartı</h6>
-                      <p className="text-sm text-gray-600">Anında ödeme onayı</p>
-                      <div className="flex justify-center mt-2">
-                        <CheckCircle className={`h-5 w-5 ${paymentMethod === 'paytr' ? 'text-blue-600' : 'text-gray-300'}`} />
+                      <h6 className="font-bold text-gray-900 mb-2 text-lg">Kredi Kartı</h6>
+                      <p className="text-sm text-gray-600 mb-3">Anında ödeme onayı</p>
+                      <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
+                        <span className="flex items-center">
+                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
+                          3D Secure
+                        </span>
+                        <span className="flex items-center">
+                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
+                          SSL
+                        </span>
                       </div>
                     </div>
                   </button>
@@ -623,20 +648,38 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('bank')}
-                    className={`p-4 rounded-lg border-2 transition-all ${
+                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
                       paymentMethod === 'bank'
-                        ? 'border-green-500 bg-green-50 shadow-md'
-                        : 'border-gray-200 bg-white hover:border-green-300'
+                        ? 'border-emerald-500 bg-gradient-to-br from-emerald-50 to-teal-50 shadow-xl shadow-emerald-100'
+                        : 'border-gray-200 bg-white hover:border-emerald-300 hover:shadow-lg'
                     }`}
                   >
+                    <div className="absolute top-4 right-4">
+                      {paymentMethod === 'bank' && (
+                        <div className="bg-emerald-500 text-white rounded-full p-1">
+                          <CheckCircle className="h-4 w-4" />
+                        </div>
+                      )}
+                    </div>
+                    
                     <div className="text-center">
-                      <div className="bg-white p-2 rounded-lg shadow-sm border mb-3 mx-auto w-fit">
-                        <Building2 className="h-6 w-6 text-green-600" />
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <Building2 className="h-8 w-8 text-white" />
                       </div>
-                      <h6 className="font-semibold text-gray-800 mb-2">Banka Transferi</h6>
-                      <p className="text-sm text-gray-600">EFT/Havale ile ödeme</p>
-                      <div className="flex justify-center mt-2">
-                        <CheckCircle className={`h-5 w-5 ${paymentMethod === 'bank' ? 'text-green-600' : 'text-gray-300'}`} />
+                      <div className="bg-white px-4 py-2 rounded-full shadow-sm border mb-4 mx-auto w-fit">
+                        <Building2 className="h-5 w-5 text-emerald-600" />
+                      </div>
+                      <h6 className="font-bold text-gray-900 mb-2 text-lg">Banka Transferi</h6>
+                      <p className="text-sm text-gray-600 mb-3">EFT/Havale ile ödeme</p>
+                      <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
+                        <span className="flex items-center">
+                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
+                          Güvenli
+                        </span>
+                        <span className="flex items-center">
+                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
+                          1-2 gün
+                        </span>
                       </div>
                     </div>
                   </button>
@@ -645,60 +688,114 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('paypal')}
-                    className={`p-4 rounded-lg border-2 transition-all ${
+                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
                       paymentMethod === 'paypal'
-                        ? 'border-orange-500 bg-orange-50 shadow-md'
-                        : 'border-gray-200 bg-white hover:border-orange-300'
+                        ? 'border-orange-500 bg-gradient-to-br from-orange-50 to-amber-50 shadow-xl shadow-orange-100'
+                        : 'border-gray-200 bg-white hover:border-orange-300 hover:shadow-lg'
                     }`}
                   >
+                    <div className="absolute top-4 right-4">
+                      {paymentMethod === 'paypal' && (
+                        <div className="bg-orange-500 text-white rounded-full p-1">
+                          <CheckCircle className="h-4 w-4" />
+                        </div>
+                      )}
+                    </div>
+                    
                     <div className="text-center">
-                      <div className="bg-white p-2 rounded-lg shadow-sm border mb-3 mx-auto w-fit">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <CreditCard className="h-8 w-8 text-white" />
+                      </div>
+                      <div className="bg-white px-4 py-2 rounded-full shadow-sm border mb-4 mx-auto w-fit">
                         <div className="text-lg font-bold text-orange-600">PayPal</div>
                       </div>
-                      <h6 className="font-semibold text-gray-800 mb-2">PayPal</h6>
-                      <p className="text-sm text-gray-600">Uluslararası ödeme</p>
-                      <div className="flex justify-center mt-2">
-                        <CheckCircle className={`h-5 w-5 ${paymentMethod === 'paypal' ? 'text-orange-600' : 'text-gray-300'}`} />
+                      <h6 className="font-bold text-gray-900 mb-2 text-lg">PayPal</h6>
+                      <p className="text-sm text-gray-600 mb-3">Uluslararası ödeme</p>
+                      <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
+                        <span className="flex items-center">
+                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
+                          Global
+                        </span>
+                        <span className="flex items-center">
+                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
+                          Anında
+                        </span>
                       </div>
                     </div>
                   </button>
+                </div>
+
+                {/* Trust Badges */}
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <div className="flex items-center justify-center space-x-8 text-gray-400">
+                    <div className="flex items-center text-sm">
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      SSL Güvenlik
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      PCI DSS Uyumlu
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      256-bit Şifreleme
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* PayTR Payment Details */}
               {paymentMethod === 'paytr' && (
-                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-200/50 shadow-sm">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="bg-white p-3 rounded-lg shadow-sm border">
-                      <div className="text-2xl font-bold text-blue-600">PayTR</div>
+                <div className="bg-white border border-blue-200 rounded-2xl p-8 shadow-lg">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl mb-4">
+                      <CreditCard className="h-10 w-10 text-white" />
+                    </div>
+                    <h5 className="text-2xl font-bold text-gray-900 mb-2">PayTR Güvenli Ödeme</h5>
+                    <p className="text-gray-600">Türkiye'nin güvenilir ödeme altyapısı</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-xl">
+                      <h6 className="font-semibold text-blue-900 mb-3">Güvenlik Özellikleri</h6>
+                      <ul className="space-y-2">
+                        <li className="flex items-center text-sm text-blue-700">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                          256-bit SSL şifrelemesi
+                        </li>
+                        <li className="flex items-center text-sm text-blue-700">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                          3D Secure doğrulama
+                        </li>
+                        <li className="flex items-center text-sm text-blue-700">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                          PCI DSS Level 1 sertifikalı
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-4 rounded-xl">
+                      <h6 className="font-semibold text-emerald-900 mb-3">Desteklenen Kartlar</h6>
+                      <ul className="space-y-2">
+                        <li className="flex items-center text-sm text-emerald-700">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                          Visa, Mastercard, Amex
+                        </li>
+                        <li className="flex items-center text-sm text-emerald-700">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                          Anında ödeme onayı
+                        </li>
+                        <li className="flex items-center text-sm text-emerald-700">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                          Tüm Türk bankaları
+                        </li>
+                      </ul>
                     </div>
                   </div>
-                  <h5 className="font-semibold text-blue-900 mb-3 text-lg text-center">PayTR Güvenli Ödeme</h5>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <ul className="text-sm text-blue-700 space-y-2">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        256-bit SSL şifrelemesi
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        3D Secure doğrulama
-                      </li>
-                    </ul>
-                    <ul className="text-sm text-blue-700 space-y-2">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        Visa, Mastercard, Amex
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        Anında ödeme onayı
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-blue-600">
-                      Kredi kartı bilgileriniz PayTR güvenli ödeme altyapısında işlenir
+                  
+                  <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-4 rounded-xl text-center">
+                    <p className="text-sm font-medium">
+                      🔒 Kredi kartı bilgileriniz PayTR'nin güvenli altyapısında işlenir ve saklanmaz
                     </p>
                   </div>
                 </div>
@@ -706,46 +803,76 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
               {/* Bank Transfer Details */}
               {paymentMethod === 'bank' && (
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200/50 shadow-sm">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="bg-white p-3 rounded-lg shadow-sm border">
-                      <Building2 className="h-8 w-8 text-green-600" />
+                <div className="bg-white border border-emerald-200 rounded-2xl p-8 shadow-lg">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl mb-4">
+                      <Building2 className="h-10 w-10 text-white" />
                     </div>
+                    <h5 className="text-2xl font-bold text-gray-900 mb-2">Banka Transferi</h5>
+                    <p className="text-gray-600">Güvenli ve geleneksel ödeme yöntemi</p>
                   </div>
-                  <h5 className="font-semibold text-green-900 mb-4 text-lg text-center">Banka Transferi Bilgileri</h5>
                   
-                  <div className="bg-white p-4 rounded-lg border border-green-200/50 mb-4">
-                    <div className="space-y-3 text-sm">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Banka:</span>
-                        <span className="font-bold">Türkiye İş Bankası</span>
+                  <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl mb-6">
+                    <h6 className="text-lg font-bold text-emerald-900 mb-4 text-center">Hesap Bilgileri</h6>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-white p-4 rounded-xl shadow-sm">
+                        <div className="text-center">
+                          <div className="text-sm font-medium text-gray-500 mb-1">Banka</div>
+                          <div className="text-lg font-bold text-gray-900">Türkiye İş Bankası</div>
+                        </div>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Hesap Sahibi:</span>
-                        <span className="font-bold">VizeProTR Ltd. Şti.</span>
+                      <div className="bg-white p-4 rounded-xl shadow-sm">
+                        <div className="text-center">
+                          <div className="text-sm font-medium text-gray-500 mb-1">Hesap Sahibi</div>
+                          <div className="text-lg font-bold text-gray-900">VizeProTR Ltd. Şti.</div>
+                        </div>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">IBAN:</span>
-                        <span className="font-bold font-mono">TR64 0006 4000 0011 2345 6789 01</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-600">Şube Kodu:</span>
-                        <span className="font-bold">1234</span>
+                      <div className="bg-white p-4 rounded-xl shadow-sm md:col-span-2">
+                        <div className="text-center">
+                          <div className="text-sm font-medium text-gray-500 mb-1">IBAN</div>
+                          <div className="text-xl font-mono font-bold text-emerald-700 tracking-wider">TR64 0006 4000 0011 2345 6789 01</div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-orange-50 p-4 rounded-lg border border-orange-200/50">
-                    <h6 className="font-semibold text-orange-900 mb-2 flex items-center">
-                      <AlertCircle className="h-4 w-4 mr-2" />
-                      Önemli Bilgiler
-                    </h6>
-                    <ul className="text-sm text-orange-700 space-y-1">
-                      <li>• Transfer açıklamasına adınızı ve telefon numaranızı yazın</li>
-                      <li>• Dekont/makbuzun fotoğrafını e-posta ile gönderin</li>
-                      <li>• İşlem süresi: 1-2 iş günü</li>
-                      <li>• Transfer sonrası başvuru numaranız e-posta ile gönderilecek</li>
-                    </ul>
+                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-6 rounded-2xl">
+                    <div className="flex items-center mb-4">
+                      <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center mr-3">
+                        <AlertCircle className="h-4 w-4 text-white" />
+                      </div>
+                      <h6 className="text-lg font-bold text-amber-900">Transfer Talimatları</h6>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center text-sm text-amber-800">
+                          <div className="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <span className="text-xs font-bold">1</span>
+                          </div>
+                          Transfer açıklamasına adınızı yazın
+                        </div>
+                        <div className="flex items-center text-sm text-amber-800">
+                          <div className="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <span className="text-xs font-bold">2</span>
+                          </div>
+                          Dekont fotoğrafını e-posta ile gönderin
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-center text-sm text-amber-800">
+                          <div className="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <span className="text-xs font-bold">3</span>
+                          </div>
+                          İşlem süresi: 1-2 iş günü
+                        </div>
+                        <div className="flex items-center text-sm text-amber-800">
+                          <div className="w-6 h-6 bg-amber-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <span className="text-xs font-bold">4</span>
+                          </div>
+                          Başvuru numarası e-posta ile gelir
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
