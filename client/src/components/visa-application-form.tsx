@@ -583,12 +583,30 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
             <div className="space-y-6">
               <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Güvenli Ödeme</h4>
               
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200/50 shadow-sm">
-                <h5 className="font-semibold text-green-900 mb-4 text-lg">Ödeme Özeti</h5>
-                <div className="text-base text-green-700">
-                  <div className="flex justify-between items-center py-2">
-                    <span className="font-medium">Hizmet Ücreti:</span>
-                    <span className="font-bold text-xl text-green-800">{fee}</span>
+              <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 border border-emerald-200 p-8 rounded-2xl shadow-lg">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full mb-4">
+                    <CheckCircle className="h-8 w-8 text-white" />
+                  </div>
+                  <h5 className="text-2xl font-bold text-gray-900 mb-2">Ödeme Özeti</h5>
+                  <p className="text-gray-600">Vize başvuru hizmet ücreti</p>
+                </div>
+                
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
+                        <FileText className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-gray-900 text-lg">{country.name} Vize Başvurusu</div>
+                        <div className="text-sm text-gray-600">{purpose} amaçlı seyahat</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold text-emerald-600">{fee}</div>
+                      <div className="text-sm text-gray-500">Tüm vergiler dahil</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -879,38 +897,56 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
               {/* PayPal Details */}
               {paymentMethod === 'paypal' && (
-                <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-200/50 shadow-sm">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="bg-white p-3 rounded-lg shadow-sm border">
-                      <div className="text-2xl font-bold text-orange-600">PayPal</div>
+                <div className="bg-white border border-orange-200 rounded-2xl p-8 shadow-lg">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl mb-4">
+                      <CreditCard className="h-10 w-10 text-white" />
+                    </div>
+                    <h5 className="text-2xl font-bold text-gray-900 mb-2">PayPal Güvenli Ödeme</h5>
+                    <p className="text-gray-600">Dünya çapında güvenilir ödeme platformu</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-xl">
+                      <h6 className="font-semibold text-orange-900 mb-3">Güvenlik ve Koruma</h6>
+                      <ul className="space-y-2">
+                        <li className="flex items-center text-sm text-orange-700">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                          Alıcı koruma programı
+                        </li>
+                        <li className="flex items-center text-sm text-orange-700">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                          256-bit SSL şifrelemesi
+                        </li>
+                        <li className="flex items-center text-sm text-orange-700">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                          Dolandırıcılık koruması
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl">
+                      <h6 className="font-semibold text-blue-900 mb-3">Ödeme Seçenekleri</h6>
+                      <ul className="space-y-2">
+                        <li className="flex items-center text-sm text-blue-700">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                          PayPal bakiye
+                        </li>
+                        <li className="flex items-center text-sm text-blue-700">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                          Kredi/banka kartı
+                        </li>
+                        <li className="flex items-center text-sm text-blue-700">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                          Çoklu para birimi
+                        </li>
+                      </ul>
                     </div>
                   </div>
-                  <h5 className="font-semibold text-orange-900 mb-3 text-lg text-center">PayPal Güvenli Ödeme</h5>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <ul className="text-sm text-orange-700 space-y-2">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        Uluslararası güvenli ödeme
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        Kredi kartı koruması
-                      </li>
-                    </ul>
-                    <ul className="text-sm text-orange-700 space-y-2">
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        Çoklu para birimi desteği
-                      </li>
-                      <li className="flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                        Anında ödeme onayı
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-xs text-orange-600">
-                      PayPal hesabınız veya kredi kartınız ile güvenli ödeme yapabilirsiniz
+                  
+                  <div className="bg-gradient-to-r from-orange-600 to-amber-600 text-white p-4 rounded-xl text-center">
+                    <p className="text-sm font-medium">
+                      🌐 PayPal hesabınız olmasa bile kredi kartınızla güvenle ödeme yapabilirsiniz
                     </p>
                   </div>
                 </div>
