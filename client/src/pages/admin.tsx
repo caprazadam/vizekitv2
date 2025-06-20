@@ -26,6 +26,8 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { formatFee } from "@/lib/utils";
 import { useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import type { Consultation } from "@shared/schema";
 
 interface ApplicationData {
   applicationNumber: string;
@@ -62,8 +64,14 @@ export default function Admin() {
   const [selectedApplication, setSelectedApplication] = useState<ApplicationData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [activeTab, setActiveTab] = useState<'applications' | 'consultations'>('applications');
   const { toast } = useToast();
   const [, setLocation] = useLocation();
+
+  const { data: consultations = [], isLoading: consultationsLoading } = useQuery<Consultation[]>({
+    queryKey: ["/api/consultations"],
+    enabled: isAuthenticated,
+  });
 
   useEffect(() => {
     checkAuthentication();
@@ -247,8 +255,37 @@ export default function Admin() {
           </Button>
         </div>
 
+        {/* Tab Navigation */}
+        <div className="mb-8">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab('applications')}
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'applications'
+                    ? 'border-purple-500 text-purple-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Vize Başvuruları
+              </button>
+              <button
+                onClick={() => setActiveTab('consultations')}
+                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'consultations'
+                    ? 'border-purple-500 text-purple-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Danışmanlık Talepleri
+              </button>
+            </nav>
+          </div>
+        </div>
+
         {/* Statistics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        {activeTab === 'applications' && (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-blue-50/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -297,8 +334,62 @@ export default function Admin() {
             </CardContent>
           </Card>
         </div>
+        )}
+
+        {/* Consultation Statistics */}
+        {activeTab === 'consultations' && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-blue-50/50">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Toplam Talep</p>
+                    <p className="text-3xl font-bold text-blue-600">{consultations.length}</p>
+                  </div>
+                  <Users className="h-8 w-8 text-blue-600" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-green-50/50">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Bu Hafta</p>
+                    <p className="text-3xl font-bold text-green-600">
+                      {consultations.filter(c => {
+                        const weekAgo = new Date();
+                        weekAgo.setDate(weekAgo.getDate() - 7);
+                        return new Date(c.createdAt) > weekAgo;
+                      }).length}
+                    </p>
+                  </div>
+                  <TrendingUp className="h-8 w-8 text-green-600" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-purple-50/50">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">En Son Talep</p>
+                    <p className="text-lg font-bold text-purple-600">
+                      {consultations.length > 0 
+                        ? new Date(consultations[0].createdAt).toLocaleDateString('tr-TR')
+                        : 'Henüz yok'
+                      }
+                    </p>
+                  </div>
+                  <Calendar className="h-8 w-8 text-purple-600" />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Filters */}
+        {activeTab === 'applications' && (
         <Card className="mb-8 shadow-lg border-0 bg-gradient-to-br from-white via-purple-50/20 to-violet-50/10">
           <CardHeader>
             <CardTitle className="text-xl font-bold text-gray-800">Başvuru Filtrele</CardTitle>

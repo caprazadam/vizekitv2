@@ -135,6 +135,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get all consultations (admin only)
+  app.get("/api/consultations", async (_req, res) => {
+    try {
+      const consultations = await storage.getConsultations();
+      res.json(consultations);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch consultations" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

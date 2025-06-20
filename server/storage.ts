@@ -15,6 +15,7 @@ export interface IStorage {
   getServices(): Promise<Service[]>;
   
   createConsultation(consultation: InsertConsultation): Promise<Consultation>;
+  getConsultations(): Promise<Consultation[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -169,6 +170,12 @@ export class MemStorage implements IStorage {
     };
     this.consultations.set(id, consultation);
     return consultation;
+  }
+
+  async getConsultations(): Promise<Consultation[]> {
+    return Array.from(this.consultations.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
   }
 }
 
