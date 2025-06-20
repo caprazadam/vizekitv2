@@ -65,6 +65,7 @@ export default function Admin() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState<'applications' | 'consultations'>('applications');
+  const [selectedConsultation, setSelectedConsultation] = useState<Consultation | null>(null);
   const { toast } = useToast();
   const [, setLocation] = useLocation();
 
@@ -438,8 +439,10 @@ export default function Admin() {
             </div>
           </CardContent>
         </Card>
+        )}
 
         {/* Applications Table */}
+        {activeTab === 'applications' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Applications List */}
           <Card className="shadow-lg border-0 bg-gradient-to-br from-white via-purple-50/20 to-violet-50/10">
@@ -727,6 +730,135 @@ export default function Admin() {
             </CardContent>
           </Card>
         </div>
+        )}
+
+        {/* Consultations List */}
+        {activeTab === 'consultations' && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-white via-purple-50/20 to-violet-50/10">
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-gray-800">Danışmanlık Talepleri</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {consultationsLoading ? (
+                  <div className="text-center py-8">
+                    <div className="animate-spin w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+                    <p className="text-gray-600">Yükleniyor...</p>
+                  </div>
+                ) : consultations.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <Users className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+                    <p>Henüz danışmanlık talebi yok</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4 max-h-96 overflow-y-auto">
+                    {consultations.map((consultation) => (
+                      <div
+                        key={consultation.id}
+                        className="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                        onClick={() => setSelectedConsultation(consultation)}
+                      >
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-semibold text-gray-800">
+                              {consultation.firstName} {consultation.lastName}
+                            </h4>
+                            <p className="text-sm text-gray-600">{consultation.email}</p>
+                            <p className="text-sm text-gray-500 mt-1">{consultation.phone}</p>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-xs text-gray-500">
+                              {new Date(consultation.createdAt).toLocaleDateString('tr-TR')}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="mt-2">
+                          <p className="text-sm text-gray-700 line-clamp-2">
+                            <strong>Hedef Ülke:</strong> {consultation.destinationCountry}
+                          </p>
+                          <p className="text-sm text-gray-700 line-clamp-2">
+                            <strong>Mesaj:</strong> {consultation.message.substring(0, 100)}...
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-white via-purple-50/20 to-violet-50/10">
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-gray-800">Talep Detayları</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {selectedConsultation ? (
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-3 border-b border-purple-200/50 pb-2">
+                        Kişisel Bilgiler
+                      </h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Ad Soyad:</span>
+                          <span>{selectedConsultation.firstName} {selectedConsultation.lastName}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">E-posta:</span>
+                          <span>{selectedConsultation.email}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Telefon:</span>
+                          <span>{selectedConsultation.phone}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-3 border-b border-purple-200/50 pb-2">
+                        Seyahat Bilgileri
+                      </h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Hedef Ülke:</span>
+                          <span>{selectedConsultation.destinationCountry}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {selectedConsultation.message && (
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-3 border-b border-purple-200/50 pb-2">
+                          Mesaj
+                        </h4>
+                        <p className="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg">
+                          {selectedConsultation.message}
+                        </p>
+                      </div>
+                    )}
+
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-3 border-b border-purple-200/50 pb-2">
+                        Talep Bilgileri
+                      </h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Talep Tarihi:</span>
+                          <span>{new Date(selectedConsultation.createdAt).toLocaleDateString('tr-TR')} {new Date(selectedConsultation.createdAt).toLocaleTimeString('tr-TR')}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-gray-500">
+                    <Eye className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+                    <p>Detayları görüntülemek için bir talep seçin</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
