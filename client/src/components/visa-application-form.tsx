@@ -577,19 +577,15 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
             <div className="space-y-6">
               <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Güvenli Ödeme</h4>
               
-              <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+              <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-lg">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <CheckCircle className="h-6 w-6 text-emerald-600 mr-3" />
-                    <div>
-                      <div className="font-semibold text-gray-900">{country.name} Vize Başvurusu</div>
-                      <div className="text-sm text-gray-600">{purpose} amaçlı seyahat</div>
-                    </div>
+                  <div className="flex items-center space-x-4">
+                    <CheckCircle className="h-5 w-5 text-emerald-600" />
+                    <span className="font-semibold text-gray-900">{country.name} Vize Başvurusu</span>
+                    <span className="text-gray-600">•</span>
+                    <span className="text-sm text-gray-600">{purpose} amaçlı</span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-emerald-600">{fee}</div>
-                    <div className="text-xs text-gray-500">Vergiler dahil</div>
-                  </div>
+                  <div className="font-bold text-xl text-emerald-600">{fee}</div>
                 </div>
               </div>
 
