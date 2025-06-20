@@ -145,11 +145,10 @@ export default function Services() {
                 price: "8000₺",
                 period: "",
                 features: [
-                  "Tüm Shengen ülkelerine vize randevu alma",
-                  "USA ve Kanada vize randevusu alma",
+                  "Tüm Shengen ülkelerine vize randevusu alma",
+                  "7/24 Destek",
                   "Tüm profesyonel hizmetler",
                   "Hızlı işlem garantisi",
-                  "24/7 destek",
                   "Kişisel danışman",
                   "Geri ödeme garantisi",
                   "Konsolosluk Koordinasyon ücreti dahildir"
