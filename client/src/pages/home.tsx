@@ -110,10 +110,10 @@ export default function Home() {
       <section className="gradient-hero text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Vize Gereksinimlerini Kontrol Edin
+            Sürekli sayfa yenilemeye son verin.
           </h1>
           <p className="text-xl lg:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto">
-            200+ ülke için anında vize gereksinimleri, işlem süreleri ve başvuru rehberliği alın
+            #yapayzeka destekli projemiz randevu bulmanızı sağlar, e-vize başvurusu yapar ve vize randevusu alır
           </p>
           
           {/* Horizontal Search Form */}
