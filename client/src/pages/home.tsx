@@ -346,7 +346,7 @@ export default function Home() {
               },
               {
                 title: "Sağlık Gereksinimleri",
-                image: "https://pixabay.com/get/g0275fefd29d11cc446f2caebcecf19a5b452be4de581425f204433da8ad296aa22e6e23c73a20736e083a07ea09ec27c2b356f485de31f4b95c5dc5523c03de1_1280.jpg",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
                 items: ["Aşı sertifikaları", "Tıbbi muayene", "Sağlık sigortası"]
               },
               {
