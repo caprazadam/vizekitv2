@@ -35,20 +35,21 @@ export default function Countries() {
 
   function getRegion(countryCode: string): string {
     const regions: Record<string, string> = {
-      'US': 'north-america',
-      'CA': 'north-america',
-      'GB': 'europe',
-      'DE': 'europe',
-      'FR': 'europe',
-      'TR': 'europe',
-      'RU': 'europe',
-      'CN': 'asia',
-      'IN': 'asia',
-      'TH': 'asia',
-      'VN': 'asia',
-      'AU': 'oceania',
-      'BR': 'south-america',
-      'EG': 'africa'
+      // Avrupa
+      'DE': 'europe', 'PL': 'europe', 'BG': 'europe', 'AT': 'europe', 'BE': 'europe', 
+      'FR': 'europe', 'NL': 'europe', 'IT': 'europe', 'GB': 'europe', 'BA': 'europe', 
+      'RS': 'europe', 'BY': 'europe', 'UA': 'europe',
+      // Asya
+      'AZ': 'asia', 'KR': 'asia', 'JP': 'asia', 'QA': 'asia', 'MY': 'asia', 'TH': 'asia',
+      'IN': 'asia', 'UZ': 'asia', 'LK': 'asia', 'BH': 'asia', 'AE': 'asia',
+      // Kuzey Amerika
+      'US': 'north-america', 'CA': 'north-america',
+      // Güney Amerika
+      'AR': 'south-america', 'BR': 'south-america',
+      // Afrika
+      'MA': 'africa', 'KE': 'africa',
+      // Okyanusya
+      'BS': 'oceania', 'PH': 'oceania'
     };
     return regions[countryCode] || 'other';
   }
