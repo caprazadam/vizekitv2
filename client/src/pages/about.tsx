@@ -107,56 +107,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Uzman Ekibimiz
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Alanında uzman vize danışmanlarımız size en iyi hizmeti sunmak için burada
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Ahmet Kaya",
-                role: "Baş Vize Uzmanı",
-                experience: "15+ yıl deneyim",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-              },
-              {
-                name: "Elif Demir",
-                role: "Avrupa Vize Uzmanı",
-                experience: "12+ yıl deneyim",
-                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-              },
-              {
-                name: "Mehmet Şahin",
-                role: "Amerika Vize Uzmanı",
-                experience: "10+ yıl deneyim",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-              }
-            ].map((member, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-8">
-                  <img 
-                    src={member.image}
-                    alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto mb-6 object-cover"
-                  />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-visa-blue font-medium mb-2">{member.role}</p>
-                  <p className="text-gray-600">{member.experience}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Why Choose Us */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
