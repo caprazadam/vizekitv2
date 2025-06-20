@@ -99,3 +99,45 @@
 .gradient-hero {
   background: linear-gradient(135deg, var(--visa-blue) 0%, hsl(207, 90%, 44%) 100%);
 }
+
+/* Cross-browser optimizations */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Enhanced mobile touch targets */
+@media (max-width: 768px) {
+  .touch-target, button, [role="button"], input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
+
+/* Smooth scrolling for all browsers */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better focus visibility for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--visa-blue);
+  outline-offset: 2px;
+}
