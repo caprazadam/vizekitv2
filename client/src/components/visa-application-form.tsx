@@ -466,36 +466,30 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                 </Label>
                 <div className="space-y-4">
                   {!passportImagePreview ? (
-                    <div className="border-2 border-dashed border-purple-300 rounded-lg p-8 text-center hover:border-purple-400 transition-colors">
+                    <div className="border-2 border-dashed border-purple-300 rounded-lg p-6 text-center hover:border-purple-400 transition-colors">
                       <input
-                        id="passportImage"
+                        id="passportImageInput"
                         type="file"
                         accept="image/jpeg,image/jpg,image/png,application/pdf"
                         onChange={handlePassportImageUpload}
                         className="hidden"
                       />
-                      <label
-                        htmlFor="passportImage"
-                        className="cursor-pointer flex flex-col items-center space-y-3"
+                      <div className="bg-purple-100 p-3 rounded-full mx-auto w-fit mb-4">
+                        <Upload className="h-8 w-8 text-purple-600" />
+                      </div>
+                      <p className="text-lg font-medium text-gray-700 mb-2">Pasaport dosyasını yükleyin</p>
+                      <p className="text-sm text-gray-500 mb-4">
+                        JPG, PNG veya PDF formatında, maksimum 5MB
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => document.getElementById('passportImageInput')?.click()}
+                        className="border-purple-300 text-purple-700 hover:bg-purple-50"
                       >
-                        <div className="bg-purple-100 p-3 rounded-full">
-                          <Upload className="h-8 w-8 text-purple-600" />
-                        </div>
-                        <div>
-                          <p className="text-lg font-medium text-gray-700">Pasaport dosyasını yükleyin</p>
-                          <p className="text-sm text-gray-500 mt-1">
-                            JPG, PNG veya PDF formatında, maksimum 5MB
-                          </p>
-                        </div>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          className="mt-3 border-purple-300 text-purple-700 hover:bg-purple-50"
-                        >
-                          <Upload className="h-4 w-4 mr-2" />
-                          Dosya Seç
-                        </Button>
-                      </label>
+                        <Upload className="h-4 w-4 mr-2" />
+                        Dosya Seç
+                      </Button>
                     </div>
                   ) : (
                     <div className="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -583,82 +577,44 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
             <div className="space-y-6">
               <h4 className="font-semibold text-xl text-gray-800 border-b border-purple-200/50 pb-3">Güvenli Ödeme</h4>
               
-              <div className="bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 border border-emerald-200 p-8 rounded-2xl shadow-lg">
-                <div className="text-center mb-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full mb-4">
-                    <CheckCircle className="h-8 w-8 text-white" />
+              <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-6 w-6 text-emerald-600 mr-3" />
+                    <div>
+                      <div className="font-semibold text-gray-900">{country.name} Vize Başvurusu</div>
+                      <div className="text-sm text-gray-600">{purpose} amaçlı seyahat</div>
+                    </div>
                   </div>
-                  <h5 className="text-2xl font-bold text-gray-900 mb-2">Ödeme Özeti</h5>
-                  <p className="text-gray-600">Vize başvuru hizmet ücreti</p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
-                        <FileText className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-gray-900 text-lg">{country.name} Vize Başvurusu</div>
-                        <div className="text-sm text-gray-600">{purpose} amaçlı seyahat</div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-bold text-emerald-600">{fee}</div>
-                      <div className="text-sm text-gray-500">Tüm vergiler dahil</div>
-                    </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-emerald-600">{fee}</div>
+                    <div className="text-xs text-gray-500">Vergiler dahil</div>
                   </div>
                 </div>
               </div>
 
               {/* Payment Method Selection */}
-              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-lg">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full mb-4">
-                    <CheckCircle className="h-8 w-8 text-white" />
-                  </div>
-                  <h5 className="text-2xl font-bold text-gray-900 mb-2">Güvenli Ödeme Yöntemleri</h5>
-                  <p className="text-gray-600">256-bit SSL şifrelemesi ile korunan ödeme seçenekleri</p>
-                </div>
+              <div className="bg-white p-4 rounded-lg border border-gray-200">
+                <h5 className="font-semibold text-gray-900 mb-4 flex items-center">
+                  <Shield className="h-5 w-5 text-green-600 mr-2" />
+                  Ödeme Yöntemi Seçin
+                </h5>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {/* PayTR Option */}
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('paytr')}
-                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
+                    className={`p-3 rounded-lg border-2 transition-all ${
                       paymentMethod === 'paytr'
-                        ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-cyan-50 shadow-xl shadow-blue-100'
-                        : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-lg'
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-200 hover:border-blue-300'
                     }`}
                   >
-                    <div className="absolute top-4 right-4">
-                      {paymentMethod === 'paytr' && (
-                        <div className="bg-blue-500 text-white rounded-full p-1">
-                          <CheckCircle className="h-4 w-4" />
-                        </div>
-                      )}
-                    </div>
-                    
                     <div className="text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <CreditCard className="h-8 w-8 text-white" />
-                      </div>
-                      <div className="bg-white px-4 py-2 rounded-full shadow-sm border mb-4 mx-auto w-fit">
-                        <div className="text-lg font-bold text-blue-600">PayTR</div>
-                      </div>
-                      <h6 className="font-bold text-gray-900 mb-2 text-lg">Kredi Kartı</h6>
-                      <p className="text-sm text-gray-600 mb-3">Anında ödeme onayı</p>
-                      <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
-                        <span className="flex items-center">
-                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
-                          3D Secure
-                        </span>
-                        <span className="flex items-center">
-                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
-                          SSL
-                        </span>
-                      </div>
+                      <CreditCard className="h-6 w-6 mx-auto mb-2 text-blue-600" />
+                      <div className="font-semibold text-sm">PayTR</div>
+                      <div className="text-xs text-gray-600">Kredi Kartı</div>
                     </div>
                   </button>
 
@@ -666,39 +622,16 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('bank')}
-                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
+                    className={`p-3 rounded-lg border-2 transition-all ${
                       paymentMethod === 'bank'
-                        ? 'border-emerald-500 bg-gradient-to-br from-emerald-50 to-teal-50 shadow-xl shadow-emerald-100'
-                        : 'border-gray-200 bg-white hover:border-emerald-300 hover:shadow-lg'
+                        ? 'border-emerald-500 bg-emerald-50'
+                        : 'border-gray-200 hover:border-emerald-300'
                     }`}
                   >
-                    <div className="absolute top-4 right-4">
-                      {paymentMethod === 'bank' && (
-                        <div className="bg-emerald-500 text-white rounded-full p-1">
-                          <CheckCircle className="h-4 w-4" />
-                        </div>
-                      )}
-                    </div>
-                    
                     <div className="text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <Building2 className="h-8 w-8 text-white" />
-                      </div>
-                      <div className="bg-white px-4 py-2 rounded-full shadow-sm border mb-4 mx-auto w-fit">
-                        <Building2 className="h-5 w-5 text-emerald-600" />
-                      </div>
-                      <h6 className="font-bold text-gray-900 mb-2 text-lg">Banka Transferi</h6>
-                      <p className="text-sm text-gray-600 mb-3">EFT/Havale ile ödeme</p>
-                      <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
-                        <span className="flex items-center">
-                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
-                          Güvenli
-                        </span>
-                        <span className="flex items-center">
-                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
-                          1-2 gün
-                        </span>
-                      </div>
+                      <Building2 className="h-6 w-6 mx-auto mb-2 text-emerald-600" />
+                      <div className="font-semibold text-sm">Banka</div>
+                      <div className="text-xs text-gray-600">EFT/Havale</div>
                     </div>
                   </button>
 
@@ -706,59 +639,18 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('paypal')}
-                    className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
+                    className={`p-3 rounded-lg border-2 transition-all ${
                       paymentMethod === 'paypal'
-                        ? 'border-orange-500 bg-gradient-to-br from-orange-50 to-amber-50 shadow-xl shadow-orange-100'
-                        : 'border-gray-200 bg-white hover:border-orange-300 hover:shadow-lg'
+                        ? 'border-orange-500 bg-orange-50'
+                        : 'border-gray-200 hover:border-orange-300'
                     }`}
                   >
-                    <div className="absolute top-4 right-4">
-                      {paymentMethod === 'paypal' && (
-                        <div className="bg-orange-500 text-white rounded-full p-1">
-                          <CheckCircle className="h-4 w-4" />
-                        </div>
-                      )}
-                    </div>
-                    
                     <div className="text-center">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <CreditCard className="h-8 w-8 text-white" />
-                      </div>
-                      <div className="bg-white px-4 py-2 rounded-full shadow-sm border mb-4 mx-auto w-fit">
-                        <div className="text-lg font-bold text-orange-600">PayPal</div>
-                      </div>
-                      <h6 className="font-bold text-gray-900 mb-2 text-lg">PayPal</h6>
-                      <p className="text-sm text-gray-600 mb-3">Uluslararası ödeme</p>
-                      <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
-                        <span className="flex items-center">
-                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
-                          Global
-                        </span>
-                        <span className="flex items-center">
-                          <CheckCircle className="h-3 w-3 mr-1 text-green-500" />
-                          Anında
-                        </span>
-                      </div>
+                      <Globe className="h-6 w-6 mx-auto mb-2 text-orange-600" />
+                      <div className="font-semibold text-sm">PayPal</div>
+                      <div className="text-xs text-gray-600">Uluslararası</div>
                     </div>
                   </button>
-                </div>
-
-                {/* Trust Badges */}
-                <div className="mt-8 pt-6 border-t border-gray-100">
-                  <div className="flex items-center justify-center space-x-8 text-gray-400">
-                    <div className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      SSL Güvenlik
-                    </div>
-                    <div className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      PCI DSS Uyumlu
-                    </div>
-                    <div className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      256-bit Şifreleme
-                    </div>
-                  </div>
                 </div>
               </div>
 
