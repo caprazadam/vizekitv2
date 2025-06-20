@@ -318,12 +318,14 @@ export default function VisaApplicationForm({ country, purpose, fee, onClose }: 
 
           <CardContent className="space-y-8 p-6 sm:p-8">
             {/* Application Summary */}
-            <div className="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-xl border border-purple-200/50 shadow-sm">
+            <div className="bg-gradient-to-r from-purple-50 to-violet-50 p-4 rounded-lg border border-purple-200/50">
             <h4 className="font-medium mb-2">Başvuru Özeti</h4>
-            <div className="text-sm text-gray-600 space-y-1">
-              <div>Hedef Ülke: {country.name}</div>
-              <div>Seyahat Amacı: {purpose}</div>
-              <div>Hizmet Ücreti: <span className="font-medium text-green-600">{fee}</span></div>
+            <div className="text-sm text-gray-600 flex items-center space-x-4">
+              <span>Hedef Ülke: <span className="font-medium">{country.name}</span></span>
+              <span className="text-gray-400">•</span>
+              <span>Seyahat Amacı: <span className="font-medium">{purpose}</span></span>
+              <span className="text-gray-400">•</span>
+              <span>Hizmet Ücreti: <span className="font-medium text-green-600">{fee}</span></span>
             </div>
           </div>
 
