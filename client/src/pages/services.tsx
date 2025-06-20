@@ -116,12 +116,12 @@ export default function Services() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                name: "Temel",
-                price: "99₺",
+                name: "Müsaitlik Bildirimi",
+                price: "999₺",
                 period: "/başvuru",
                 features: [
-                  "Vize gereksinim kontrolü",
-                  "Belge listesi hazırlama",
+                  "Vize uygunluğu kontrolü",
+                  "1 ülke için sorgu",
                   "Temel danışmanlık",
                   "Email desteği"
                 ],
@@ -182,7 +182,7 @@ export default function Services() {
                   <Button 
                     className={`w-full ${plan.popular ? 'bg-visa-blue hover:bg-blue-700' : 'bg-gray-800 hover:bg-gray-900'}`}
                   >
-                    Paketi Seç
+                    Satın Al
                   </Button>
                 </CardContent>
               </Card>
