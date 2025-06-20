@@ -118,7 +118,7 @@ export default function Services() {
               {
                 name: "Müsaitlik Bildirimi",
                 price: "999₺",
-                period: "/başvuru",
+                period: "",
                 features: [
                   "Vize uygunluğu kontrolü",
                   "1 ülke için sorgu",
@@ -130,7 +130,7 @@ export default function Services() {
               {
                 name: "Profesyonel",
                 price: "199₺",
-                period: "/başvuru",
+                period: "",
                 features: [
                   "Tüm temel hizmetler",
                   "Belge inceleme",
@@ -143,7 +143,7 @@ export default function Services() {
               {
                 name: "Premium",
                 price: "299₺",
-                period: "/başvuru",
+                period: "",
                 features: [
                   "Tüm profesyonel hizmetler",
                   "Randevu alma yardımı",
