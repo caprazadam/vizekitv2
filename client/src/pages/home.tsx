@@ -117,8 +117,8 @@ export default function Home() {
           </p>
           
           {/* Horizontal Search Form */}
-          <div className="bg-white rounded-xl shadow-2xl p-8 text-gray-900 max-w-5xl mx-auto">
-            <form onSubmit={handleHeroFormSubmit} className="grid md:grid-cols-4 gap-4">
+          <div className="bg-white rounded-xl shadow-2xl p-4 sm:p-6 lg:p-8 text-gray-900 max-w-5xl mx-auto">
+            <form onSubmit={handleHeroFormSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 text-left">
                   Vatandaşlığınız
@@ -178,14 +178,14 @@ export default function Home() {
                 </Select>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 sm:col-span-2 lg:col-span-1">
                 <label className="block text-sm font-medium text-gray-700 text-left opacity-0">
                   Ara
                 </label>
                 <Button 
                   type="submit" 
                   disabled={isChecking}
-                  className="w-full h-12 bg-visa-blue hover:bg-blue-700 text-lg font-semibold"
+                  className="w-full h-12 bg-visa-blue hover:bg-blue-700 text-base lg:text-lg font-semibold"
                 >
                   {isChecking ? "Kontrol Ediliyor..." : "Vizeyi Kontrol Et"}
                 </Button>

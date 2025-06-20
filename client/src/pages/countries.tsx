@@ -205,7 +205,7 @@ export default function Countries() {
                             {regionCountries.length} ülke
                           </Badge>
                         </div>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                           {regionCountries.map((country) => (
                             <CountryCard key={country.id} country={country} />
                           ))}
@@ -215,7 +215,7 @@ export default function Countries() {
                   })}
                 </>
               ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                   {filteredCountries.map((country) => (
                     <CountryCard key={country.id} country={country} />
                   ))}
