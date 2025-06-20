@@ -1,4 +1,5 @@
 import { users, countries, visaRequirements, services, consultations, type User, type InsertUser, type Country, type InsertCountry, type VisaRequirement, type InsertVisaRequirement, type Service, type InsertService, type Consultation, type InsertConsultation } from "@shared/schema";
+import { serviceCountries } from "./countries-service";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -44,24 +45,16 @@ export class MemStorage implements IStorage {
   }
 
   private initializeData() {
-    // Initialize countries with exact visa requirements for Turkish passport holders
-    const countriesData: Omit<Country, 'id'>[] = [
-      // Ücretsiz Giriş Yapılan Ülkeler (Vizesiz Seyahat)
-      {
-        name: "Arjantin",
-        code: "AR",
-        flag: "🇦🇷",
-        image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-        description: "Ücretsiz giriş - Türk pasaportunuz varsa Arjantin seyahat etmek için vizeye ihtiyacınız yoktur",
-        processingTime: "Vizesiz - 90 gün kalmak",
-        fee: "Vize ücreti yok",
-        visaRequired: false,
-        eVisaAvailable: false,
-        visaOnArrival: false,
-      },
-      {
-        name: "Azerbaycan",
-        code: "AZ",
+    // Initialize countries with exact visa requirements for Turkish passport holders - Only countries we provide services for
+    const countriesData: Omit<Country, 'id'>[] = serviceCountries;
+
+    countriesData.forEach(countryData => {
+      const country: Country = { ...countryData, id: this.currentCountryId++ };
+      this.countries.set(country.id, country);
+    });
+
+    // Initialize services
+    const servicesData: Omit<Service, 'id'>[] = [
         flag: "🇦🇿",
         image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
         description: "Ücretsiz giriş - Türk pasaportunuz varsa Azerbaycan seyahat etmek için vizeye ihtiyacınız yoktur",
