@@ -128,17 +128,17 @@ export default function Services() {
                 popular: false
               },
               {
-                name: "Profesyonel",
+                name: "E-vize Başvurusu",
                 price: "199₺",
                 period: "",
                 features: [
                   "Tüm temel hizmetler",
                   "Belge inceleme",
-                  "Başvuru formu doldurmada yardım",
+                  "Belge hazırlama",
                   "Telefon desteği",
-                  "Başvuru takibi"
+                  "Başvuru ve Onay takibi"
                 ],
-                popular: true
+                popular: false
               },
               {
                 name: "Premium",
@@ -152,7 +152,7 @@ export default function Services() {
                   "Kişisel danışman",
                   "Geri ödeme garantisi"
                 ],
-                popular: false
+                popular: true
               }
             ].map((plan, index) => (
               <Card key={index} className={`relative ${plan.popular ? 'ring-2 ring-visa-blue' : ''}`}>
