@@ -29,7 +29,7 @@ export default function CountryCard({ country }: CountryCardProps) {
         <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-purple-400/10 to-violet-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         
-        {!imageError ? (
+        {country.image && !imageError ? (
           <img 
             src={country.image} 
             alt={`${country.name} landmarks`}
@@ -38,11 +38,10 @@ export default function CountryCard({ country }: CountryCardProps) {
             onLoad={handleImageLoad}
           />
         ) : (
-          <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-violet-100 rounded-t-xl relative z-10 flex items-center justify-center">
+          <div className="w-full h-48 bg-gradient-to-br from-purple-100 via-blue-50 to-violet-100 rounded-t-xl relative z-10 flex items-center justify-center">
             <div className="text-center">
-              <MapPin className="h-12 w-12 text-purple-400 mx-auto mb-2" />
-              <div className="text-4xl mb-2">{country.flag}</div>
-              <div className="text-sm text-purple-600 font-medium">{country.name}</div>
+              <div className="text-8xl mb-3 filter drop-shadow-lg">{country.flag}</div>
+              <div className="text-lg text-purple-700 font-semibold">{country.name}</div>
             </div>
           </div>
         )}
