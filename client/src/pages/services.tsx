@@ -129,7 +129,7 @@ export default function Services() {
               },
               {
                 name: "E-vize Başvurusu",
-                price: "199₺",
+                price: "4000₺",
                 period: "",
                 features: [
                   "Tüm temel hizmetler",
