@@ -90,9 +90,6 @@ export default function Services() {
               <Card key={item.step} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-8">
                   <div className="w-20 h-20 bg-visa-blue rounded-full flex items-center justify-center mx-auto mb-6 text-white">
-                    <span className="text-2xl font-bold">{item.step}</span>
-                  </div>
-                  <div className="w-16 h-16 bg-visa-blue-lighter rounded-full flex items-center justify-center mx-auto mb-6 text-visa-blue">
                     {item.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{item.title}</h3>
