@@ -36,7 +36,7 @@ export default function Countries() {
   function getRegion(countryCode: string): string {
     const regions: Record<string, string> = {
       // Avrupa
-      'DE': 'europe', 'PL': 'europe', 'BG': 'europe', 'AT': 'europe', 'BE': 'europe', 
+      'TR': 'europe', 'DE': 'europe', 'PL': 'europe', 'BG': 'europe', 'AT': 'europe', 'BE': 'europe', 
       'FR': 'europe', 'NL': 'europe', 'IT': 'europe', 'GB': 'europe', 'BA': 'europe', 
       'RS': 'europe', 'BY': 'europe', 'UA': 'europe',
       // Asya

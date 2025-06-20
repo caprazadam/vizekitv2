@@ -1,6 +1,20 @@
 import type { Country } from "@shared/schema";
 
 export const serviceCountries: Omit<Country, 'id'>[] = [
+  // Türkiye (Kaynak ülke)
+  {
+    name: "Türkiye",
+    code: "TR",
+    flag: "🇹🇷",
+    image: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+    description: "Kaynak ülke - Türk vatandaşları için vize danışmanlığı hizmetleri",
+    processingTime: "Kaynak ülke",
+    fee: "Kaynak ülke",
+    visaRequired: false,
+    eVisaAvailable: false,
+    visaOnArrival: false,
+  },
+  
   // Ücretsiz Giriş (Vizesiz Seyahat)
   {
     name: "Arjantin",
